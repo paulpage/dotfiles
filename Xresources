@@ -1,0 +1,28 @@
+xterm*faceName: Dejavu Sans Mono
+xterm*faceSize: 10
+xterm*loginShell: true
+
+xterm*ScrollBar: false
+
+! special
+*.foreground:   #fbf1c7
+*.background:   #262626
+*.cursorColor:  #fbf1c7
+
+! color scheme: gruvbox
+xterm*color0:       #262626
+xterm*color1:       #cc241d
+xterm*color2:       #98971a
+xterm*color3:       #d79921
+xterm*color4:       #458588
+xterm*color5:       #b16286
+xterm*color6:       #689d6a
+xterm*color7:       #a89984
+xterm*color8:       #928374
+xterm*color9:       #fb4934
+xterm*color10:      #b8bb26
+xterm*color11:      #fabd2f
+xterm*color12:      #83a59a
+xterm*color13:      #d3869b
+xterm*color14:      #8ec07c
+xterm*color15:      #ebdbb2
