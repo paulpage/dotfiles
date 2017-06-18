@@ -4,7 +4,7 @@
 xset -b
 
 # set background
-feh --bg-scale ~/path/to/image
+feh --bg-scale ~/Pictures/Wallpapers/forest.jpg
 
 # keyboard options
 setxkbmap -option compose:ralt
