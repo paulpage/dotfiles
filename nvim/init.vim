@@ -44,9 +44,10 @@ inoremap kj <Esc>
 inoremap jk <Esc>
 map <space> <leader>
 set wildcharm=<Tab>
-nnoremap <leader>l :b <Tab>
-nnoremap <leader>t :NERDTree<cr>
 nnoremap <f1> :set hlsearch!<cr>
 
 nnoremap <leader>ve :edit $MYVIMRC<cr>
 nnoremap <leader>vs :source $MYVIMRC<cr>
+nnoremap <leader>l :b <Tab>
+nnoremap <leader>t :NERDTree<cr>
+nnoremap <leader>w :w<cr>
