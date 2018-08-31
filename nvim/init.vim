@@ -7,6 +7,7 @@ Plug 'junegunn/fzf'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-fugitive'
 
 " Core
 Plug 'tpope/vim-surround' " edit surrounding characters such as [] or <t></t>
