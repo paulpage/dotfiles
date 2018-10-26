@@ -47,7 +47,7 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+g layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -155,5 +155,5 @@ client.background       #fbf1c7
 
 bindsym $mod+shift+x exec --no-startup-id sudo shutdown now
 
-bindsym $mod+i exec surf duckduckgo.com
-bindsym $mod+shift+i exec firefox
+bindsym $mod+i exec firefox
+bindsym $mod+e exec dolphin
