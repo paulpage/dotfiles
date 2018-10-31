@@ -18,8 +18,12 @@ Plug 'morhetz/gruvbox'
 
 " Language Support
 Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
+
+" Disable neovim version warning for go plugin
+let g:go_version_warning = 0
 
 au FileType markdown setlocal ts=2 sw=2 sts=2
 
