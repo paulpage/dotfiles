@@ -16,6 +16,9 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'morhetz/gruvbox'
 
+" Language Support
+Plug 'fatih/vim-go'
+
 call plug#end()
 
 au FileType markdown setlocal ts=2 sw=2 sts=2
@@ -25,6 +28,8 @@ set background=dark
 colorscheme gruvbox
 set number
 set mouse=a
+set splitright
+set splitbelow
 
 " Behavior
 set expandtab
