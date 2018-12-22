@@ -12,7 +12,7 @@ font pango:DejaVu Sans 9
 floating_modifier $mod 
 
 # start a terminal
-bindsym $mod+Return exec urxvt || i3-sensible-terminal
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+q kill
@@ -140,20 +140,22 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86MonBrightnessDown exec --no-startup-id sudo ~/bin/bright_down
 bindsym XF86MonBrightnessUp exec --no-startup-id sudo ~/bin/bright_up
 
+set $border_color #d8ae7d
+
 # color
 # class                 border  backgr. text    indicator child_border
-client.focused          #000000 #000000 #fbf1c7 #000000   #000000
+client.focused          $border_color #ff0000 #fbf1c7 $border_color   $border_color
 client.focused_inactive #000000 #000000 #928374 #000000   #000000
 client.unfocused        #000000 #000000 #928374 #000000   #000000
 client.urgent           #2f343a #900000 #fbf1c7 #900000   #900000
 client.placeholder      #000000 #0c0c0c #fbf1c7 #000000   #0c0c0c
 
-client.background       #fbf1c7 
-
 # No borders or titlebars
-# for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 2
+gaps inner 15
+gaps outer 15
 
 bindsym $mod+shift+x exec --no-startup-id sudo shutdown now
 
 bindsym $mod+i exec firefox
-bindsym $mod+e exec dolphin
+bindsym $mod+e exec pcmanfm
