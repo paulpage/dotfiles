@@ -10,7 +10,7 @@ Plug 'tpope/vim-unimpaired' " use brackets and parentheses for useful shortcuts
 Plug 'tpope/vim-repeat' " repeat plugin commands with .
 
 " Interface
-Plug '/hom/paul/.fzf/bin/fzf'
+Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
