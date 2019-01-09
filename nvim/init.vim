@@ -11,7 +11,7 @@ Plug 'tpope/vim-repeat' " repeat plugin commands with .
 
 " Interface
 Plug '~/.fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'morhetz/gruvbox'
