@@ -1,3 +1,4 @@
+export PATH=$PATH:/home/paul/.cargo/bin
 alias v=nvim
 alias vim=nvim
 alias g=git
