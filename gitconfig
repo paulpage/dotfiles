@@ -3,3 +3,8 @@
 	email = pjpage98@gmail.com
 	username = paulpage
 
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
