@@ -8,7 +8,7 @@ mkdir -p "$backup_dir"
 
 
 [ -f "$HOME/.bashrc" ] && cp "$HOME/.bashrc" "$backup_dir"
-[ -f "$HOME/.config/i3" ] && cp "$HOME/.config/i3" "$backup_dir"
+[ -f "$HOME/.config/i3/config" ] && cp "$HOME/.config/i3/config" "$backup_dir"
 [ -f "$HOME/.config/nvim/init.vim" ] && cp "$HOME/.config/nvim/init.vim" "$backup_dir"
 [ -f "$HOME/.gitconfig" ] && cp "$HOME/.gitconfig" "$backup_dir"
 [ -f "$HOME/.local/share/applications/img.desktop" ] && cp "$HOME/.local/share/applications/img.desktop" "$backup_dir"
@@ -22,7 +22,7 @@ mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.config/nvim"
 
 ln -sf "$dir/.bashrc" "$HOME/.bashrc"
-ln -sf "$dir/.config/i3" "$HOME/.config/i3"
+ln -sf "$dir/.config/i3/config" "$HOME/.config/i3/config"
 ln -sf "$dir/.config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 ln -sf "$dir/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$dir/.local/share/applications/img.desktop" "$HOME/.local/share/applications/img.desktop"
