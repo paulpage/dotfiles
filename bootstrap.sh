@@ -5,8 +5,6 @@ dir="$(pwd)"
 backup_dir="$HOME/dotfiles_backup_$(date +'%Y-%m-%d_%H:%M:%S')"
 mkdir -p "$backup_dir"
 
-
-
 [ -f "$HOME/.bashrc" ] && cp "$HOME/.bashrc" "$backup_dir"
 [ -f "$HOME/.config/i3/config" ] && cp "$HOME/.config/i3/config" "$backup_dir"
 [ -f "$HOME/.config/nvim/init.vim" ] && cp "$HOME/.config/nvim/init.vim" "$backup_dir"
@@ -20,6 +18,7 @@ mkdir -p "$backup_dir"
 mkdir -p "$HOME/.local/share/applications"
 mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/i3"
 
 ln -sf "$dir/.bashrc" "$HOME/.bashrc"
 ln -sf "$dir/.config/i3/config" "$HOME/.config/i3/config"
