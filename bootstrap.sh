@@ -30,7 +30,8 @@ ln -sf "$dir/.local/share/applications/text.desktop" "$HOME/.local/share/applica
 ln -sf "$dir/.profile" "$HOME/.profile"
 ln -sf "$dir/.xinitrc" "$HOME/.xinitrc"
 
-mkdir -p "$HOME/.config/nvim/autoload"
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 #./programs_ubuntu.sh
 #
