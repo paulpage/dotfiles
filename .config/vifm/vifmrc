@@ -1,0 +1,18 @@
+" vim: filetype=vifm
+
+set vicmd=$EDITOR
+set syscalls
+set nofollowlinks
+set sortnumbers
+set undolevels=100
+set wildmenu
+set wildstyle=popup
+set scrolloff=4
+set ignorecase
+set smartcase
+set nohlsearch
+set incsearch
+
+nmap q ZQ
+
+only

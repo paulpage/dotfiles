@@ -5,57 +5,28 @@ dir="$(pwd)"
 backup_dir="$HOME/dotfiles_backup_$(date +'%Y-%m-%d_%H:%M:%S')"
 mkdir -p "$backup_dir"
 
-[ -f "$HOME/.bashrc" ] && cp "$HOME/.bashrc" "$backup_dir"
-[ -f "$HOME/.config/i3/config" ] && cp "$HOME/.config/i3/config" "$backup_dir"
-[ -f "$HOME/.config/nvim/init.vim" ] && cp "$HOME/.config/nvim/init.vim" "$backup_dir"
-[ -f "$HOME/.gitconfig" ] && cp "$HOME/.gitconfig" "$backup_dir"
-[ -f "$HOME/.local/share/applications/img.desktop" ] && cp "$HOME/.local/share/applications/img.desktop" "$backup_dir"
-[ -f "$HOME/.local/share/applications/pdf.desktop" ] && cp "$HOME/.local/share/applications/pdf.desktop" "$backup_dir"
-[ -f "$HOME/.local/share/applications/text.desktop" ] && cp "$HOME/.local/share/applications/text.desktop" "$backup_dir"
-[ -f "$HOME/.profile" ] && cp "$HOME/.profile" "$backup_dir"
-[ -f "$HOME/.xinitrc" ] && cp "$HOME/.xinitrc" "$backup_dir"
+# curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 mkdir -p "$HOME/.local/share/applications"
 mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.config/nvim"
-mkdir -p "$HOME/.config/i3"
+mkdir -p "$HOME/.config/sxhkd"
+mkdir -p "$HOME/.config/vifm"
 
-ln -sf "$dir/.bashrc" "$HOME/.bashrc"
-ln -sf "$dir/.config/i3/config" "$HOME/.config/i3/config"
-ln -sf "$dir/.config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
-ln -sf "$dir/.gitconfig" "$HOME/.gitconfig"
-ln -sf "$dir/.local/share/applications/img.desktop" "$HOME/.local/share/applications/img.desktop"
-ln -sf "$dir/.local/share/applications/pdf.desktop" "$HOME/.local/share/applications/pdf.desktop"
-ln -sf "$dir/.local/share/applications/text.desktop" "$HOME/.local/share/applications/text.desktop"
-ln -sf "$dir/.profile" "$HOME/.profile"
-ln -sf "$dir/.xinitrc" "$HOME/.xinitrc"
-
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-#./programs_ubuntu.sh
-#
-#mkdir -p $HOME/src
-#cd $HOME/src
-#git clone https://github.com/paulpage/st
-#cd st
-#sudo make install
-#
-#cd $HOME
-#echo "Creating $olddir to backup old dotfiles..."
-#mkdir -p $olddir
-#
-#mv $HOME/.bashrc $olddir
-#mv $HOME/.config/nvim/init.vim $olddir
-#mv $HOME/.gitconfig $olddir
-#
-#mkdir -p $HOME/.config/nvim/autoload
-#cd $HOME/.config/nvim/autoload
-#git clone --depth 1 https://github.com/junegunn/vim-plug
-#cp vim-plug/plug.vim .
-#rm -rf vim-plug
-#
-#mkdir -p $HOME/.config/nvim
-#ln -sf $dir/nvim/init.vim $HOME/.config/nvim/init.vim
-#ln -sf $dir/bashrc $HOME/.bashrc
-#ln -sf $dir/gitconfig $HOME/.gitconfig
+for file in \
+	"bashrc" \
+	".config/i3/config" \
+	".config/nvim/init.vim" \
+	".config/sxhkd/sxhkdrc" \
+	".config/vifm/vifmrc" \
+	".gitconfig" \
+	".local/share/applications/img.desktop" \
+	".local/share/applications/pdf.desktop" \
+	".local/share/applications/text.desktop" \
+	".profile" \
+	".xinitrc"; \
+do
+	[ -f "$HOME/$file" ] && cp "$HOME/$file" "$backup_dir"
+	ln -sf "$dir/$file" "$HOME/$file"
+done

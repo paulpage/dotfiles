@@ -13,4 +13,6 @@ xinput set-prop 13 298 1
 # Set background
 feh --bg-scale ~/Pictures/wallpapers/wallpaper.jpg
 
-exec i3
+sxhkd &
+
+exec dwm

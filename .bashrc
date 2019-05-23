@@ -7,3 +7,5 @@ alias ls='ls --color=auto'
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+alias p="sudo pacman"

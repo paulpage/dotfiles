@@ -1,0 +1,11 @@
+super + Return
+	$TERMINAL
+super + d
+	dmenu_run
+super + e
+	$TERMINAL -e vifm
+super + shift + a
+	$TERMINAL -e pulsemixer
+super + shift + b
+	firefox
+

@@ -160,3 +160,4 @@ bindsym $mod+shift+x exec --no-startup-id sudo shutdown now
 
 bindsym $mod+i exec firefox
 bindsym $mod+e exec pcmanfm
+bindsym $mod+v exec st -e pulsemixer
