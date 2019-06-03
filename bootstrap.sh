@@ -13,9 +13,11 @@ mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.config/nvim"
 mkdir -p "$HOME/.config/sxhkd"
 mkdir -p "$HOME/.config/vifm"
+mkdir -p "$HOME/.config/fontconfig"
 
 for file in \
-	"bashrc" \
+	".config/emoji" \
+	".config/fontconfig/fonts.conf" \
 	".config/i3/config" \
 	".config/nvim/init.vim" \
 	".config/sxhkd/sxhkdrc" \
@@ -25,7 +27,8 @@ for file in \
 	".local/share/applications/pdf.desktop" \
 	".local/share/applications/text.desktop" \
 	".profile" \
-	".xinitrc"; \
+	".xinitrc" \
+	".bashrc";
 do
 	[ -f "$HOME/$file" ] && cp "$HOME/$file" "$backup_dir"
 	ln -sf "$dir/$file" "$HOME/$file"
