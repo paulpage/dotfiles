@@ -8,4 +8,5 @@ super + a
 	$TERMINAL -e pulsemixer
 super + i
 	$BROWSER
-
+super + shift + x
+    sudo shutdown now
