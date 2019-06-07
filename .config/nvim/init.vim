@@ -44,10 +44,6 @@ set ignorecase
 set smartcase
 set linebreak
 
-" Easier esc
-inoremap jk <esc>
-inoremap kj <esc>
-
 " Interface shortcuts
 nnoremap <space>. :edit .<CR>
 nnoremap <space>, :FZF<CR>
