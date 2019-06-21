@@ -24,6 +24,11 @@ Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
 " Disable neovim version warning for go plugin
 let g:go_version_warning = 0
 
@@ -72,5 +77,8 @@ nnoremap <silent> <F1> :set hlsearch!<CR>
 nnoremap <space>vs :source $MYVIMRC<CR>
 nnoremap <space>ve :edit $MYVIMRC<CR>
 nnoremap <space>vi :PlugInstall<CR>
+
+nnoremap <c-n> :cnext<CR>
+nnoremap <c-p> :cprev<CR>
 
 nnoremap <space>t ma:r!cd ~/templates/ && ls \| dmenu \| xargs cat<CR>'add
