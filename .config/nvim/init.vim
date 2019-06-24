@@ -72,6 +72,7 @@ nnoremap <space>du :diffupdate<CR>
 
 " Function key mappings
 nnoremap <silent> <F1> :set hlsearch!<CR>
+nnoremap          <F5> :make<CR>
 
 " Vim configuration mappings
 nnoremap <space>vs :source $MYVIMRC<CR>
