@@ -13,7 +13,8 @@ Plug 'tpope/vim-repeat' " repeat plugin commands with .
 Plug '~/.fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'jlanzarotta/bufexplorer'
-Plug 'scrooloose/nerdtree'
+Plug 'justinmk/vim-dirvish'
+Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -21,6 +22,7 @@ Plug 'airblade/vim-gitgutter'
 " Language Support
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 
 call plug#end()
 
