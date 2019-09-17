@@ -36,6 +36,9 @@ let g:go_version_warning = 0
 
 au FileType markdown setlocal ts=2 sw=2 sts=2
 
+" Enable groff extensions
+let b:nroff_is_groff = 1
+
 " Interface
 set background=dark
 colorscheme gruvbox
