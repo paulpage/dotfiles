@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dir="$(pwd)"
+cwd="$(pwd)"
 
 backup_dir="$HOME/dotfiles_backup_$(date +'%Y-%m-%d_%H:%M:%S')"
 mkdir -p "$backup_dir"
@@ -22,6 +22,7 @@ for file in \
 	".config/nvim/init.vim" \
 	".config/sxhkd/sxhkdrc" \
 	".config/vifm/vifmrc" \
+	".config/mimeapps.list" \
 	".gitconfig" \
 	".local/share/applications/img.desktop" \
 	".local/share/applications/pdf.desktop" \
@@ -31,5 +32,15 @@ for file in \
 	".bashrc";
 do
 	[ -f "$HOME/$file" ] && cp "$HOME/$file" "$backup_dir"
-	ln -sf "$dir/$file" "$HOME/$file"
+	ln -sf "$cwd/$file" "$HOME/$file"
+done
+
+for dir in \
+    ".local/bin";
+do
+    [ -d "$HOME/$dir" ] && cp -r "$HOME/$dir" "$backup_dir" || mkdir "$HOME/$dir"
+    for file in $(ls "$cwd/$dir");
+    do
+        ln -sf "$cwd/$dir/$file" "$HOME/$dir/$file"
+    done
 done
