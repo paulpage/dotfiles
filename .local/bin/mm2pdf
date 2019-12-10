@@ -1,2 +1,2 @@
 #!/bin/sh
-groff -mm -e -t -Tdvi "$1" | dvipdfmx -q
+groff -mm -e -t "$1" -Tdvi | dvipdfmx -q

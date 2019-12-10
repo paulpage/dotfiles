@@ -1,3 +1,4 @@
+# Programs
 super + Return
 	$TERMINAL
 super + d
@@ -5,8 +6,28 @@ super + d
 super + e
 	$TERMINAL -e vifm
 super + a
-	$TERMINAL -e pulsemixer
+	pavucontrol
 super + i
 	$BROWSER
+
+# Window Manager
 super + shift + x
     sudo shutdown now
+super + shift + r
+    pkill -USR1 -x sxhkd && bspc wm -r
+super + shift + e
+    bspc quit 1
+super + q
+    bspc node -c
+super + m
+    bspc desktop -l next
+super + shift + @space
+    bspc node -s biggest
+super + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+super + alt + {h,j,k,l}
+    bspc node -z {left -50 0,bottom 0 50,top 0 -50,right 50 0}
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
+super + space
+    bspc node -t \~floating

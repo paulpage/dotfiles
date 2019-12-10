@@ -8,11 +8,14 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-export TERMINAL="st"
+export XDG_CONFIG_HOME="$HOME/.config"
+
+export TERMINAL="uxterm"
 export READER="zathura"
 export EDITOR="nvim"
 export BROWSER="firefox"
 export FILE="vifm"
+export PAGER="less --mouse"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

@@ -14,14 +14,15 @@ mkdir -p "$HOME/.config/nvim"
 mkdir -p "$HOME/.config/sxhkd"
 mkdir -p "$HOME/.config/vifm"
 mkdir -p "$HOME/.config/fontconfig"
+mkdir -p "$HOME/.config/bspwm"
 
 for file in \
 	".config/emoji" \
 	".config/fontconfig/fonts.conf" \
-	".config/i3/config" \
 	".config/nvim/init.vim" \
 	".config/sxhkd/sxhkdrc" \
 	".config/vifm/vifmrc" \
+	".config/bspwm/bspwmrc" \
 	".config/mimeapps.list" \
 	".gitconfig" \
 	".local/share/applications/img.desktop" \
@@ -29,7 +30,7 @@ for file in \
 	".local/share/applications/text.desktop" \
 	".profile" \
 	".xinitrc" \
-	".bashrc";
+	".zshrc";
 do
 	[ -f "$HOME/$file" ] && cp "$HOME/$file" "$backup_dir"
 	ln -sf "$cwd/$file" "$HOME/$file"

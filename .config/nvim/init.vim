@@ -18,13 +18,22 @@ Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree'
 
 " Language Support
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'elixir-editors/vim-elixir'
+Plug 'ianks/vim-tsx'
+
+
+Plug 'https://github.com/norcalli/nvim-colorizer.lua'
 
 call plug#end()
+
+set termguicolors
+lua require 'colorizer'.setup()
 
 if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
@@ -64,10 +73,10 @@ nnoremap <space>w :w<CR>
 nnoremap <space>q :q<CR>
 
 " Easier copy/paste to system clipboard
-nnoremap <space>p "*p
-vnoremap <space>p "*p
-nnoremap <space>y "*y
-vnoremap <space>y "*y
+nnoremap <space>p "+p
+vnoremap <space>p "+p
+nnoremap <space>y "+y
+vnoremap <space>y "+y
 
 " Diff shortcuts
 nnoremap <space>dt :diffthis<CR>
@@ -88,3 +97,19 @@ nnoremap <c-n> :cnext<CR>
 nnoremap <c-p> :cprev<CR>
 
 nnoremap <space>t ma:r!cd ~/templates/ && ls \| dmenu \| xargs cat<CR>'add
+nnoremap <F29> :nnoremap <F5> :<c-v><CR<c-v>><left><left><left><left>
+
+nnoremap <c-s> :write<CR>
+
+tnoremap <c-w>w <c-\><c-n><c-w>w
+tnoremap <c-w><c-w> <c-\><c-n><c-w>w
+
+function! SwitchTo(pattern)
+    let windowNr = bufwinnr(a:pattern)
+    if windowNr > 0
+        execute windowNr 'wincmd w'
+    endif  
+endfunction
+
+let g:makecmd = 'make'
+nnoremap <m-t> :call SwitchTo('term')<CR>amake<CR><c-\><c-n><c-w><c-w>
