@@ -1,10 +1,9 @@
 #!/usr/bin/env sh
 
-melonpanel_height=22
+height=22
 font='-misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1'
-fontbold='-misc-fixed-bold-r-normal--13-120-75-75-c-80-iso10646-1'
 bg_main="#000000"
-fg_main="#ffffff"
+fg_main="#dddddd"
 
 _clock() {
     date +'%a %b %-d %H:%M'
@@ -17,12 +16,12 @@ _modules() {
     done
 }
 
-melonpanel_fifo='/tmp/melonpanel.fifo'
-[ -e "$melonpanel_fifo" ] && rm "$melonpanel_fifo"
-mkfifo "$melonpanel_fifo"
+statusbar_fifo='/tmp/melonpanel.fifo'
+[ -e "$statusbar_fifo" ] && rm "$statusbar_fifo"
+mkfifo "$statusbar_fifo"
 
-_modules > "$melonpanel_fifo" &
-bspc subscribe report > "$melonpanel_fifo" &
+_modules > "$statusbar_fifo" &
+bspc subscribe report > "$statusbar_fifo" &
 
 _main() {
     while read -r line; do
@@ -38,7 +37,6 @@ _main() {
     done
 }
 
-_main < "$melonpanel_fifo" \
-    | lemonbar -b -u 1 -p -g "x${melonpanel_height}" \
-               -F "$fg_main" -B "#ff${bg_main:1}" \
-               -f "$font" -n "Melonpanel"
+_main < "$statusbar_fifo" \
+    | lemonbar -u 1 -p -g "x${height}" \
+               -F "$fg_main" -B "#ff${bg_main:1}" -f "$font"

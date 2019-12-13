@@ -34,8 +34,7 @@ xset -b
 # Caps lock to escape
 setxkbmap -option caps:escape 
 
-sxhkd &
-statusbar &
 picom &
+sxhkd &
 
 exec bspwm
