@@ -25,6 +25,7 @@ for file in \
 	".config/bspwm/bspwmrc" \
 	".config/mimeapps.list" \
 	".gitconfig" \
+	".local/bin" \
 	".local/share/applications/img.desktop" \
 	".local/share/applications/pdf.desktop" \
 	".local/share/applications/text.desktop" \
