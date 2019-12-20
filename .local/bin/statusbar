@@ -1,7 +1,9 @@
 #!/usr/bin/env sh
 
 height=22
-font='-misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1'
+# font='-misc-fira sans-medium-r-normal--0-0-0-0-p-0-iso10646-1'
+# font='-misc-dejavu sans mono-medium-r-normal--0-0-0-0-m-0-iso10646-1'
+font='mono:size=12'
 bg_main="#000000"
 fg_main="#dddddd"
 
@@ -16,18 +18,23 @@ _modules() {
     done
 }
 
-statusbar_fifo='/tmp/melonpanel.fifo'
+statusbar_fifo='/tmp/statusbar.fifo'
 [ -e "$statusbar_fifo" ] && rm "$statusbar_fifo"
 mkfifo "$statusbar_fifo"
 
 _modules > "$statusbar_fifo" &
 bspc subscribe report > "$statusbar_fifo" &
 
+_wm() {
+    # sed -e 's/^WM(.*?):/\1/' -e 's/:f/  /g' -e 's/:o/ \*/g' -e 's/:O/>\*/g' -e 's/:F/ >/g'
+    sed -e 's/^WM//; s/:f/  /g; s/:o/ \*/g; s/:O/>\*/g; s/:F/ >/g; s/:L\(.\)/ [\1]/; s/:T\(.\)/ [\1]/; s/:G\(.*\)/ [\1]/'
+}
+
 _main() {
     while read -r line; do
         case $line in
             W*)
-                wm="$line"
+                wm="$(echo $line | _wm)"
                 ;;
             *)
                 mods="$line"
@@ -39,4 +46,4 @@ _main() {
 
 _main < "$statusbar_fifo" \
     | lemonbar -u 1 -p -g "x${height}" \
-               -F "$fg_main" -B "#ff${bg_main:1}" -f "$font"
+               -F "$fg_main" -B "#ff${bg_main:1}" -f "$font" -f "$font"
