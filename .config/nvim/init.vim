@@ -1,24 +1,21 @@
 call plug#begin()
 
-" Sensible Defaults
-Plug 'tpope/vim-sensible'
-
 " Core
 Plug 'tpope/vim-surround' " edit surrounding characters such as [] or <t></t>
 Plug 'tpope/vim-commentary' " easier commenting
 Plug 'tpope/vim-unimpaired' " use brackets and parentheses for useful shortcuts
 Plug 'tpope/vim-repeat' " repeat plugin commands with .
+Plug 'tpope/vim-sleuth' " auto detect indent
 
 " Interface
 Plug '~/.fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'jlanzarotta/bufexplorer'
-Plug 'justinmk/vim-dirvish'
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
+Plug 'https://github.com/norcalli/nvim-colorizer.lua'
 
 " Language Support
 Plug 'fatih/vim-go'
@@ -27,41 +24,58 @@ Plug 'racer-rust/vim-racer'
 Plug 'elixir-editors/vim-elixir'
 Plug 'ianks/vim-tsx'
 
-
-Plug 'https://github.com/norcalli/nvim-colorizer.lua'
-
 call plug#end()
 
-set termguicolors
-lua require 'colorizer'.setup()
+set nocompatible " No vi compatibility
+filetype plugin indent on " filetype detection, plugins, and indents
+set number " line numbers
+set backspace=indent,eol,start " reasonable backspace
+set showmode " show current mode
+set splitright " open vertical splits to the right
+set splitbelow " open horizontal splits below
+set encoding=utf-8 " default file encoding
+set laststatus=2 " always show statusbar
+set ruler " always show cursor position
+set fileformats=unix,dos,mac " prefer file formats in this order
+set incsearch " show search as I'm typing
+set nohlsearch " don't highlight search matches
+set ignorecase " ignore search case...
+set smartcase " unless I have an uppercase letter
+syntax enable " enable syntax highlighting
+syntax sync minlines=256 " make syntax highlighting better
+set synmaxcol=300 " Don't highlight beyond 300 columns
+set conceallevel=0 " don't fold
+set wrap " wrap lines
+set autoindent " automatically indent
+set linebreak " break lines on words
+set breakindent " indent all wrapped lines to same level as the first
+set smarttab " treat spaces as tabs if applicable
+set expandtab " spaces instead of tabs
+set ts=4 sts=4 sw=4 " default tab width of 4
+set mouse=a " mouse
+let g:netrw_dirhistmax=0 " don't save netrw history
+set termguicolors " 24 bit color in the TUI
+set background=dark " use colors that look good on a dark background
+colorscheme gruvbox " TODO check if it exists first
+set nrformats-=octal " don't use octal
+set complete-=i " don't search include files
+set wildmenu " enable nice command autocomplete
+if empty(mapcheck('<C-U>', 'i')) " let you undo <c-u>
+    inoremap <C-U> <C-G>u<C-U>
+endif
+if empty(mapcheck('<C-W>', 'i')) " let you undo <c-w>
+    inoremap <C-W> <C-G>u<C-W>
+endif
 
+lua require 'colorizer'.setup()
 if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
-
-" Disable neovim version warning for go plugin
-let g:go_version_warning = 0
+let g:go_version_warning = 0 " Disable neovim version warning for go plugin
+let b:nroff_is_groff = 1 " Enable groff extensions
 
 au FileType markdown setlocal ts=2 sw=2 sts=2
-
-" Enable groff extensions
-let b:nroff_is_groff = 1
-
-" Interface
-set background=dark
-colorscheme gruvbox
-set number
-set mouse=a
-set splitright
-set splitbelow
-
-" Behavior
-set expandtab
-set ts=4 sw=4 sts=4
-set ignorecase
-set smartcase
-set linebreak
 
 " Interface shortcuts
 nnoremap <space>. :edit .<CR>
