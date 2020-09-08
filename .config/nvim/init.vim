@@ -107,8 +107,10 @@ nnoremap <space>vs :source $MYVIMRC<CR>
 nnoremap <space>ve :edit $MYVIMRC<CR>
 nnoremap <space>vi :PlugInstall<CR>
 
-nnoremap <c-n> :cnext<CR>
-nnoremap <c-p> :cprev<CR>
+nnoremap <c-j> :cnext<CR>
+nnoremap <c-k> :cprev<CR>
+
+nnoremap <c-p> :FZF<CR>
 
 nnoremap <space>t ma:r!cd ~/templates/ && ls \| dmenu \| xargs cat<CR>'add
 nnoremap <F29> :nnoremap <F5> :<c-v><CR<c-v>><left><left><left><left>
@@ -127,3 +129,35 @@ endfunction
 
 let g:makecmd = 'make'
 nnoremap <m-t> :call SwitchTo('term')<CR>amake<CR><c-\><c-n><c-w><c-w>
+
+function! SwitchHeaderImpl()
+    if expand('%<').'.cpp' ==? expand('%') || expand('%<').'.c' ==? expand('%')
+        if filereadable(expand('%<').'.h')
+            edit %<.h
+        elseif filereadable(expand('%<.').'.hpp')
+            edit %<.hpp
+        elseif filereadable(expand('%<.').'.H')
+            edit %<.H
+        elseif filereadable(expand('%<').'.HPP')
+            edit %<.HPP
+        endif
+    elseif expand('%<').'.h' ==? expand('%') || expand('%<').'.hpp' ==? expand('%')
+    echo 'h'
+        if filereadable(expand('%<').'.c')
+            edit %<.c
+        elseif filereadable(expand('%<').'.cpp')
+            edit %<.cpp
+        elseif filereadable(expand('%<')'.C')
+            edit %<.C
+        elseif filereadable(expand('%<').'.CPP')
+            edit %<.CPP
+        endif
+    endif
+
+    " Jump to last known cursor position
+    if line("'\"") > 1 && line("'\"") <= line("$") |
+      exe "normal! g`\"zz" |
+    endif
+endfunction
+nnoremap <F4> :call SwitchHeaderImpl()<CR>
+inoremap <F4> <c-o>:call SwitchHeaderImpl()<CR>
