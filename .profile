@@ -10,12 +10,14 @@
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-export TERMINAL="uxterm"
+export TERMINAL="st"
 export READER="zathura"
 export EDITOR="nvim"
 export BROWSER="firefox"
-export FILE="vifm"
+export FILE="pcmanfm"
 export PAGER="less --mouse"
+
+export FZF_DEFAULT_COMMAND='fd --type file --hidden'
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

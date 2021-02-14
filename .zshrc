@@ -43,8 +43,8 @@ _comp_options+=(globdots)		# Include hidden files.
 # [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 # [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
-export PATH=$PATH:/home/paul/.cargo/bin
-alias v=nvim
+export PATH=$PATH:/home/paul/.cargo/bin:/home/paul/.local/bin/Odin
+alias vim=nvim
 alias e=nvim
 alias g=git
 alias o=xdg-open
@@ -54,7 +54,9 @@ alias p="sudo pacman"
 # Disable control flow
 stty -ixon
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="fd ."
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

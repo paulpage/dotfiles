@@ -7,17 +7,8 @@ font pango:DejaVu Sans 9
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod 
 
-# start a terminal
-bindsym $mod+Return exec st
-
-# kill focused window
 bindsym $mod+q kill
-
-# i3-dmenu-desktop only shows apps with a .desktop file
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# use if i3-dmenu-desktop isn't installed
-# bindsym $mod+d exec dmenu_run
 
 # change focus
 bindsym $mod+h focus left
@@ -31,27 +22,17 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# split in horizontal orientation
 bindsym $mod+apostrophe split h
-
-# split in vertical orientation
 bindsym $mod+slash split v
-
-# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+g layout toggle split
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+g layout toggle split
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
+bindsym $mod+shift+space floating toggle
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
@@ -81,30 +62,19 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-msg exit"
 
-# resize window (you can also use the mouse)
 mode "resize" {
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 
@@ -128,32 +98,17 @@ bar {
     }
 }
 
-# volume keys
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
+# set $border_color #d8ae7d
 
-# brightness keys
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo ~/bin/bright_down
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo ~/bin/bright_up
-
-set $border_color #d8ae7d
-
-# color
-# class                 border  backgr. text    indicator child_border
-client.focused          $border_color #ff0000 #fbf1c7 $border_color   $border_color
-client.focused_inactive #000000 #000000 #928374 #000000   #000000
-client.unfocused        #000000 #000000 #928374 #000000   #000000
-client.urgent           #2f343a #900000 #fbf1c7 #900000   #900000
-client.placeholder      #000000 #0c0c0c #fbf1c7 #000000   #0c0c0c
+# # color
+# # class                 border  backgr. text    indicator child_border
+# client.focused          $border_color #d8ae7d #000000 $border_color   $border_color
+# client.focused_inactive #000000 #000000 #928374 #000000   #000000
+# client.unfocused        #000000 #000000 #928374 #000000   #000000
+# client.urgent           #2f343a #900000 #fbf1c7 #900000   #900000
+# client.placeholder      #000000 #0c0c0c #fbf1c7 #000000   #0c0c0c
 
 # No borders or titlebars
-for_window [class="^.*"] border pixel 2
-gaps inner 5
-gaps outer 5
-
-bindsym $mod+shift+x exec --no-startup-id sudo shutdown now
-
-bindsym $mod+i exec firefox
-bindsym $mod+e exec pcmanfm
-bindsym $mod+v exec st -e pulsemixer
+# for_window [class="^.*"] border pixel 2
+# gaps inner 5
+# gaps outer 5

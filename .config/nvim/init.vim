@@ -5,17 +5,17 @@ Plug 'tpope/vim-surround' " edit surrounding characters such as [] or <t></t>
 Plug 'tpope/vim-commentary' " easier commenting
 Plug 'tpope/vim-unimpaired' " use brackets and parentheses for useful shortcuts
 Plug 'tpope/vim-repeat' " repeat plugin commands with .
-Plug 'tpope/vim-sleuth' " auto detect indent
 
 " Interface
 Plug '~/.fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
+Plug 'romainl/Apprentice'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
-Plug 'https://github.com/norcalli/nvim-colorizer.lua'
+" Plug 'https://github.com/norcalli/nvim-colorizer.lua'
 
 " Language Support
 Plug 'fatih/vim-go'
@@ -66,8 +66,9 @@ endif
 if empty(mapcheck('<C-W>', 'i')) " let you undo <c-w>
     inoremap <C-W> <C-G>u<C-W>
 endif
+let c_no_curly_error = 1
 
-lua require 'colorizer'.setup()
+" lua require 'colorizer'.setup()
 if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
     set grepformat=%f:%l:%c:%m,%f:%l:%m
@@ -109,8 +110,9 @@ nnoremap <space>vi :PlugInstall<CR>
 
 nnoremap <c-j> :cnext<CR>
 nnoremap <c-k> :cprev<CR>
-
 nnoremap <c-p> :FZF<CR>
+
+nnoremap <c-\> :NERDTreeToggle<CR>
 
 nnoremap <space>t ma:r!cd ~/templates/ && ls \| dmenu \| xargs cat<CR>'add
 nnoremap <F29> :nnoremap <F5> :<c-v><CR<c-v>><left><left><left><left>
@@ -124,6 +126,9 @@ function! SwitchTo(pattern)
     let windowNr = bufwinnr(a:pattern)
     if windowNr > 0
         execute windowNr 'wincmd w'
+    else
+        split
+        term
     endif  
 endfunction
 
@@ -161,3 +166,11 @@ function! SwitchHeaderImpl()
 endfunction
 nnoremap <F4> :call SwitchHeaderImpl()<CR>
 inoremap <F4> <c-o>:call SwitchHeaderImpl()<CR>
+
+nnoremap <m-t> :call SwitchTo('term')<CR>acargo run<CR><c-\><c-n><c-w><c-w>
+
+if filereadable("project.vim")
+    source project.vim
+endif
+
+inoremap <c-a><c-d> <esc>a<space><esc>60a=<esc>

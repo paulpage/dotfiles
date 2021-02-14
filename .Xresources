@@ -3,9 +3,9 @@ XTerm.vt100.metaSendsEscape: true
 XTerm.vt100.saveLines: 8192
 xterm.vt100.eightBitInput: false
 
-!xterm*faceName: DejaVu Sans Mono Book
-xterm*faceName: terminus-12
-!xterm*faceSize: 10
+xterm*faceName: DejaVu Sans Mono Book
+!xterm*faceName: terminus-12
+xterm*faceSize: 10
 
 xterm:loginshell: true
 

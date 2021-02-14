@@ -31,6 +31,7 @@ for file in \
 	".local/share/applications/text.desktop" \
 	".profile" \
 	".xinitrc" \
+	".Xresources" \
 	".zshrc";
 do
 	[ -f "$HOME/$file" ] && cp "$HOME/$file" "$backup_dir"
