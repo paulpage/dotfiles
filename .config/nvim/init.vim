@@ -174,3 +174,6 @@ if filereadable("project.vim")
 endif
 
 inoremap <c-a><c-d> <esc>a<space><esc>60a=<esc>
+
+nnoremap S :w<CR>
+nnoremap Q :q<CR>

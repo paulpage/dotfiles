@@ -10,6 +10,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
+ZLE_REMOVE_SUFFIX_CHARS=""
+
 # Readline/emacs style bindings
 bindkey -e
 
