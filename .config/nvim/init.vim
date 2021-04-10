@@ -6,6 +6,8 @@ Plug 'tpope/vim-commentary' " easier commenting
 Plug 'tpope/vim-unimpaired' " use brackets and parentheses for useful shortcuts
 Plug 'tpope/vim-repeat' " repeat plugin commands with .
 
+Plug 'PeterRincker/vim-argumentative' " Manipulate function arguments
+
 " Interface
 Plug '~/.fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -15,7 +17,6 @@ Plug 'romainl/Apprentice'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
-" Plug 'https://github.com/norcalli/nvim-colorizer.lua'
 
 " Language Support
 Plug 'fatih/vim-go'
@@ -75,6 +76,9 @@ if executable("rg")
 endif
 let g:go_version_warning = 0 " Disable neovim version warning for go plugin
 let b:nroff_is_groff = 1 " Enable groff extensions
+
+" source ~/src/light_colorscheme.vim
+
 
 au FileType markdown setlocal ts=2 sw=2 sts=2
 
@@ -167,7 +171,7 @@ endfunction
 nnoremap <F4> :call SwitchHeaderImpl()<CR>
 inoremap <F4> <c-o>:call SwitchHeaderImpl()<CR>
 
-nnoremap <m-t> :call SwitchTo('term')<CR>acargo run<CR><c-\><c-n><c-w><c-w>
+" nnoremap <m-t> :call SwitchTo('term')<CR>acargo run<CR><c-\><c-n><c-w><c-w>
 
 if filereadable("project.vim")
     source project.vim
@@ -175,5 +179,17 @@ endif
 
 inoremap <c-a><c-d> <esc>a<space><esc>60a=<esc>
 
-nnoremap S :w<CR>
+" nnoremap S :w<CR>
+" nnoremap Q :q<CR>
+
+function! Save()
+    if expand('%:p') ==# ''
+        echo "Hello"
+        execute "normal! :write"
+    else
+        write
+    endif
+endfunction
+
+nnoremap S :call Save()<CR>
 nnoremap Q :q<CR>

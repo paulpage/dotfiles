@@ -5,8 +5,8 @@ cwd="$(pwd)"
 backup_dir="$HOME/dotfiles_backup_$(date +'%Y-%m-%d_%H:%M:%S')"
 mkdir -p "$backup_dir"
 
-# curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 mkdir -p "$HOME/.local/share/applications"
 mkdir -p "$HOME/.local/bin"

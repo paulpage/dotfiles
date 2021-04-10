@@ -28,8 +28,8 @@ xset -b
 # `xinput list-props {device id} | grep "Scrolling Distance"`, note the id in parentheses
 # and the values set for it.
 # The final command is `xinput set-prop {device id} {property id} -{value} -{value} ...`
-# xinput set-prop 17 287 1
-# xinput set-prop 17 288 1
+xinput set-prop 17 287 1
+xinput set-prop 17 288 1
 
 # Caps lock to escape
 setxkbmap -option caps:escape 
