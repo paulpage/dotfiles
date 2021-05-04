@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+[ "$#" -ne 1 ] && echo "Usage: $0 <script-name>" && exit 1
+
+path="$HOME/.local/bin/$1"
+if [ ! -f "$path" ]; then
+    echo "#!/bin/sh" >> "$path"
+    chmod +x "$path"
+fi
+$EDITOR "$path"

@@ -1,0 +1,2 @@
+#!/bin/sh
+[ -n "$1" ] && ( slurp | grim -g - "$1" ) || ( slurp | grim -g - )

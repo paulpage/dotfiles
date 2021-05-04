@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+cd "$HOME/notes"
+git add .
+git diff --stat --cached
+message="Note sync from $(uname -n) - $(date)"
+echo "$message"
+
+echo -n "Continue (y/n)? "
+read answer
+if [ "$answer" != "${answer#[Yy]}" ] ;then
+    git commit -m "$message"
+    git push -u origin master
+else
+    echo "Sync cancelled."
+fi
