@@ -3,16 +3,13 @@
 set -e
 
 cd "$HOME/notes"
+git pull
 git add .
-git diff --stat --cached
+git diff --cached --exit-code && exit 0
 message="Note sync from $(uname -n) - $(date)"
 echo "$message"
 
-echo -n "Continue (y/n)? "
-read answer
-if [ "$answer" != "${answer#[Yy]}" ] ;then
-    git commit -m "$message"
-    git push -u origin master
-else
-    echo "Sync cancelled."
-fi
+echo -n "Press enter to continue... (Ctrl-C to cancel)"
+read _
+git commit -m "$message"
+git push -u origin master
