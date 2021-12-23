@@ -2,6 +2,8 @@
 autoload -U colors && colors
 PS1="%B%{$fg[green]%}[%{$fg[yellow]%}%n@%{$fg[yellow]%}%M %{$fg[green]%}%~%{$fg[green]%}]%{$reset_color%}$%b "
 
+unsetopt BEEP
+
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
@@ -19,7 +21,6 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-export PATH=$PATH:/home/paul/.cargo/bin:/home/paul/.local/bin/Odin
 export PATH=$PATH:/home/paul/.cargo/bin
 
 alias vim=nvim
@@ -27,7 +28,7 @@ alias e=nvim
 alias g=git
 alias o=xdg-open
 alias ls='ls --color=auto'
-alias p="sudo pacman"
+alias p="sudo dnf"
 
 # Disable control flow
 stty -ixon
