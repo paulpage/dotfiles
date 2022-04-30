@@ -21,14 +21,14 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-export PATH=$PATH:/home/paul/.cargo/bin
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/s/ext/Odin
 
 alias vim=nvim
 alias e=nvim
 alias g=git
 alias o=xdg-open
 alias ls='ls --color=auto'
-alias p="sudo dnf"
+alias p="sudo apt"
 
 # Disable control flow
 stty -ixon
