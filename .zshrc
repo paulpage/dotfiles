@@ -21,7 +21,7 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/s/ext/Odin
+export PATH="$PATH:$HOME/.local/bin:$HOME/.local/bin/scripts:/home/paul/.cargo/bin"
 
 alias vim=nvim
 alias e=nvim
