@@ -2,7 +2,7 @@ set $mod Mod4
 focus_follows_mouse yes
 
 # Font for window titles and bar
-font pango:DejaVu Sans 9 
+font pango:DejaVu Sans 10
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod 
@@ -83,7 +83,7 @@ bindsym $mod+r mode "resize"
 bar {
     status_command i3status
     font pango:mono 10
-    tray_output none
+    # tray_output none
 
     colors {
         background #000000

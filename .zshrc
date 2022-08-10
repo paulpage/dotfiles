@@ -28,7 +28,7 @@ alias e=nvim
 alias g=git
 alias o=xdg-open
 alias ls='ls --color=auto'
-alias p="sudo apt"
+alias p="sudo pacman"
 
 # Disable control flow
 stty -ixon

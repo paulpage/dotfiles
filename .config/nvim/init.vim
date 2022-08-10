@@ -26,6 +26,7 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'ianks/vim-tsx'
 Plug 'tikhomirov/vim-glsl'
 Plug 'Tetralux/odin.vim'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -78,6 +79,9 @@ if executable("rg")
 endif
 let g:go_version_warning = 0 " Disable neovim version warning for go plugin
 let b:nroff_is_groff = 1 " Enable groff extensions
+
+let g:vimwiki_list = [{'path': '~/wiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " source ~/src/light_colorscheme.vim
 

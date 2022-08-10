@@ -2,7 +2,7 @@
 super + Return
 	$TERMINAL
 super + d
-	dmenu_run
+	rofi -show drun
 super + e
 	pcmanfm-qt
 super + a
