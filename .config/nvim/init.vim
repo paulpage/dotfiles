@@ -26,9 +26,12 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'ianks/vim-tsx'
 Plug 'tikhomirov/vim-glsl'
 Plug 'Tetralux/odin.vim'
+Plug 'ziglang/zig.vim'
 Plug 'vimwiki/vimwiki'
 
 call plug#end()
+
+source C:/dev/bin/whitebox/whitebox_v0.99.0/editor_plugins/whitebox-vim/plugin/whitebox.vim
 
 set nocompatible " No vi compatibility
 filetype plugin indent on " filetype detection, plugins, and indents
@@ -80,11 +83,19 @@ endif
 let g:go_version_warning = 0 " Disable neovim version warning for go plugin
 let b:nroff_is_groff = 1 " Enable groff extensions
 
-let g:vimwiki_list = [{'path': '~/wiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+if has('win32')
+    let g:vimwiki_list = [{'path': 'C:\dev\wiki',
+                          \ 'syntax': 'markdown', 'ext': '.md'}]
+else
+    let g:vimwiki_list = [{'path': '~/wiki/',
+                          \ 'syntax': 'markdown', 'ext': '.md'}]
+endif
 
 " source ~/src/light_colorscheme.vim
 
+if g:nvy
+    set mousescroll=ver:1
+endif
 
 au FileType markdown setlocal ts=2 sw=2 sts=2
 
@@ -130,6 +141,8 @@ nnoremap <c-p> :FZF<CR>
 nnoremap <c-\> :NERDTreeToggle<CR>
 
 nnoremap <space>t ma:r!cd ~/templates/ && ls \| dmenu \| xargs cat<CR>'add
+
+nnoremap <C-F5> :nnoremap <F5> :<c-v><CR<c-v>><left><left><left><left>
 nnoremap <F29> :nnoremap <F5> :<c-v><CR<c-v>><left><left><left><left>
 nnoremap <F30> :nnoremap <F6> :<c-v><CR<c-v>><left><left><left><left>
 
@@ -138,13 +151,14 @@ nnoremap <c-s> :write<CR>
 tnoremap <c-w>w <c-\><c-n><c-w>w
 tnoremap <c-w><c-w> <c-\><c-n><c-w>w
 
-function! SwitchTo(pattern)
-    let windowNr = bufwinnr(a:pattern)
+function! SwitchToTerminal()
+    let windowNr = bufwinnr('TERM')
     if windowNr > 0
         execute windowNr 'wincmd w'
     else
         split
         term
+        file TERM
     endif  
 endfunction
 
@@ -205,3 +219,5 @@ endfunction
 
 nnoremap S :call Save()<CR>
 nnoremap Q :q<CR>
+
+nnoremap <f5> :call SwitchToTerminal()<CR>ipython rss.py<CR><c-\><c-n><c-w>w
