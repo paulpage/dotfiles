@@ -93,7 +93,7 @@ endif
 
 " source ~/src/light_colorscheme.vim
 
-if g:nvy
+if exists("g:nvy")
     set mousescroll=ver:1
 endif
 
