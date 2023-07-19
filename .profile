@@ -4,10 +4,11 @@ export TERMINAL="st"
 export READER="zathura"
 export EDITOR="nvim"
 export BROWSER="firefox"
-export FILE="pcmanfm"
+export FILE="pcmanfm-qt"
 export PAGER="less --mouse"
 
-export MOZ_ENABLE_WAYLAND=1
+# export MOZ_ENABLE_WAYLAND=1
+export MOZ_USE_XINPUT2=1
 export GTK_USE_PORTAL=1
 export FZF_DEFAULT_COMMAND='fd --type file --hidden'
 
@@ -24,5 +25,4 @@ fi
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 [ -d "$HOME/.cargo/bin" ] && PATH="$HOME/.cargo/bin:$PATH"
 
-# startx
-exec sway
+startx

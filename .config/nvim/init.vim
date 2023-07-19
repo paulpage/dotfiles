@@ -24,6 +24,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'elixir-editors/vim-elixir'
 Plug 'ianks/vim-tsx'
+Plug 'tikhomirov/vim-glsl'
+Plug 'Tetralux/odin.vim'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -77,10 +80,17 @@ endif
 let g:go_version_warning = 0 " Disable neovim version warning for go plugin
 let b:nroff_is_groff = 1 " Enable groff extensions
 
+let g:vimwiki_list = [{'path': '~/wiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
 " source ~/src/light_colorscheme.vim
 
 
 au FileType markdown setlocal ts=2 sw=2 sts=2
+
+au FileType glsl setlocal commentstring=//\ %s
+
+au FileType odin setlocal errorformat+=%f(%l:%c)\ %m
 
 " Interface shortcuts
 nnoremap <space>. :edit .<CR>
@@ -106,6 +116,7 @@ nnoremap <space>du :diffupdate<CR>
 " Function key mappings
 nnoremap <silent> <F1> :set hlsearch!<CR>
 nnoremap          <F5> :make<CR>
+nnoremap          <F6> :make run<CR>
 
 " Vim configuration mappings
 nnoremap <space>vs :source $MYVIMRC<CR>
@@ -120,6 +131,7 @@ nnoremap <c-\> :NERDTreeToggle<CR>
 
 nnoremap <space>t ma:r!cd ~/templates/ && ls \| dmenu \| xargs cat<CR>'add
 nnoremap <F29> :nnoremap <F5> :<c-v><CR<c-v>><left><left><left><left>
+nnoremap <F30> :nnoremap <F6> :<c-v><CR<c-v>><left><left><left><left>
 
 nnoremap <c-s> :write<CR>
 
