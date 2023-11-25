@@ -1,16 +1,26 @@
 # Programs
+#super + Return
+#	$TERMINAL
+#super + d
+#	rofi -show drun
+#super + e
+#	pcmanfm-qt
+#super + a
+#	pavucontrol
+#super + i
+#	$BROWSER
+#super + c
+#    $TERMINAL -e calc
 super + Return
-	$TERMINAL
-super + d
-	rofi -show drun
+    st
+#super + d
+#    dmenu
 super + e
-	pcmanfm-qt
+    pcmanfm-qt
 super + a
-	pavucontrol
+    pavucontrol
 super + i
-	$BROWSER
-super + c
-    $TERMINAL -e calc
+    firefox
 
 
 super + shift + x
