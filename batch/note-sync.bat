@@ -1,5 +1,5 @@
 @echo off
-pushd "C:\dev\wiki"
+pushd "C:\notes"
 git pull
 git add .
 git diff --cached --exit-code && exit /b

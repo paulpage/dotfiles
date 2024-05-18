@@ -9,14 +9,14 @@ Plug 'tpope/vim-repeat' " repeat plugin commands with .
 Plug 'PeterRincker/vim-argumentative' " Manipulate function arguments
 
 " Interface
-Plug '~/.fzf'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/Apprentice'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 
 " Language Support
 Plug 'fatih/vim-go'
@@ -29,7 +29,11 @@ Plug 'Tetralux/odin.vim'
 Plug 'ziglang/zig.vim'
 Plug 'vimwiki/vimwiki'
 
+Plug 'xiyaowong/telescope-emoji.nvim'
+
 call plug#end()
+
+lua require("telescope").load_extension("emoji")
 
 source C:/dev/bin/whitebox/whitebox_v0.99.0/editor_plugins/whitebox-vim/plugin/whitebox.vim
 
@@ -93,20 +97,21 @@ endif
 
 " source ~/src/light_colorscheme.vim
 
-if exists("g:nvy")
-    set mousescroll=ver:1
-endif
+" if exists("g:nvy")
+"     set mousescroll=ver:1
+" endif
 
 au FileType markdown setlocal ts=2 sw=2 sts=2
+au FileType vimwiki setlocal ts=2 sw=2 sts=2
+
+au FileType markdown inoremap <buffer> <tab> <c-t>
+au FileType vimwiki inoremap <buffer> <tab> <c-t>
 
 au FileType glsl setlocal commentstring=//\ %s
 
 au FileType odin setlocal errorformat+=%f(%l:%c)\ %m
 
 " Interface shortcuts
-nnoremap <space>. :edit .<CR>
-nnoremap <space>, :FZF<CR>
-nnoremap <space>; :BufExplorer<CR>
 nnoremap <space>/ :split<CR>
 nnoremap <space>' :vsplit<CR>
 nnoremap <space>w :w<CR>
@@ -136,14 +141,22 @@ nnoremap <space>vi :PlugInstall<CR>
 
 nnoremap <c-j> :cnext<CR>
 nnoremap <c-k> :cprev<CR>
-nnoremap <c-p> :FZF<CR>
+nnoremap <c-p> :Telescope find_files<CR>
 
-nnoremap <c-\> :NERDTreeToggle<CR>
+function! ToggleFileManager()
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    NERDTreeClose
+  else
+    NERDTree
+  endif
+endfunction
+nnoremap <silent> <c-\> :call ToggleFileManager()<CR>
 
 nnoremap <space>t ma:r!cd ~/templates/ && ls \| dmenu \| xargs cat<CR>'add
 
 nnoremap <C-F5> :nnoremap <F5> :<c-v><CR<c-v>><left><left><left><left>
 nnoremap <F29> :nnoremap <F5> :<c-v><CR<c-v>><left><left><left><left>
+nnoremap <C-F6> :nnoremap <F6> :<c-v><CR<c-v>><left><left><left><left>
 nnoremap <F30> :nnoremap <F6> :<c-v><CR<c-v>><left><left><left><left>
 
 nnoremap <c-s> :write<CR>
@@ -197,27 +210,7 @@ endfunction
 nnoremap <F4> :call SwitchHeaderImpl()<CR>
 inoremap <F4> <c-o>:call SwitchHeaderImpl()<CR>
 
-" nnoremap <m-t> :call SwitchTo('term')<CR>acargo run<CR><c-\><c-n><c-w><c-w>
-
-if filereadable("project.vim")
-    source project.vim
-endif
-
 inoremap <c-a><c-d> <esc>a<space><esc>60a=<esc>
 
-" nnoremap S :w<CR>
-" nnoremap Q :q<CR>
-
-function! Save()
-    if expand('%:p') ==# ''
-        echo "Hello"
-        execute "normal! :write"
-    else
-        write
-    endif
-endfunction
-
-nnoremap S :call Save()<CR>
-nnoremap Q :q<CR>
-
-nnoremap <f5> :call SwitchToTerminal()<CR>ipython rss.py<CR><c-\><c-n><c-w>w
+inoremap <c-s-e> <esc>:Telescope emoji<CR>
+nnoremap <c-s-e> :Telescope emoji<CR>
