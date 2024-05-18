@@ -35,8 +35,6 @@ call plug#end()
 
 lua require("telescope").load_extension("emoji")
 
-source C:/dev/bin/whitebox/whitebox_v0.99.0/editor_plugins/whitebox-vim/plugin/whitebox.vim
-
 set nocompatible " No vi compatibility
 filetype plugin indent on " filetype detection, plugins, and indents
 set number " line numbers

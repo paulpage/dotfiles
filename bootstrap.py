@@ -1,6 +1,5 @@
 import os
 import sys
-import sys
 
 
 def symlink(target, link_name):
