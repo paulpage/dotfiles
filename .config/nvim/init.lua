@@ -17,9 +17,9 @@ require 'paq' {
 
     -- Language Support
     'vimwiki/vimwiki',
-    -- 'hashivim/vim-terraform',
-    -- 'Glench/Vim-Jinja2-Syntax',
-    -- 'Vimjas/vim-python-pep8-indent',
+    'hashivim/vim-terraform',
+    'Glench/Vim-Jinja2-Syntax',
+    'Vimjas/vim-python-pep8-indent',
 }
 
 require('neo-tree').setup({
