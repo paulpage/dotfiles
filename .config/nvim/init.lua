@@ -83,7 +83,7 @@ map('n', '<space>ve', ':edit $MYVIMRC<CR>', opts)
 map('n', '<space>vi', ':PaqSync<CR>', opts)
 
 map('n', '<c-j>', ':cnext<CR>', opts)
-map('n', '<c-k>', ':cnext<CR>', opts)
+map('n', '<c-k>', ':cprev<CR>', opts)
 
 map('n', '<c-p>', ':Telescope find_files<CR>', opts)
 map('n', '<c-\\>', ':Neotree toggle<CR>', opts)  -- TODO validate or port refresh capability
