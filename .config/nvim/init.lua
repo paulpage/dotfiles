@@ -20,6 +20,7 @@ require 'paq' {
     'hashivim/vim-terraform',
     'Glench/Vim-Jinja2-Syntax',
     'Vimjas/vim-python-pep8-indent',
+    'salkin-mada/openscad.nvim',
 }
 
 require('neo-tree').setup({
@@ -33,8 +34,13 @@ require('neo-tree').setup({
             default = ' ',
             highlight = 'NeoTreeFileIcon',
         },
+
         name = {
             trailing_slash = true,
+        },
+    },
+    window = {
+        mappings = {
         },
     },
 })
@@ -61,6 +67,29 @@ vim.o.smartcase = true
 vim.o.number = true
 
 vim.g.c_no_curly_error = true
+
+-- Filetype options
+function buftab2()
+    vim.bo.expandtab = true
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+end
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = buftab2
+})
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "yaml",
+    callback = buftab2
+})
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "openscad",
+    callback = buftab2
+})
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "html",
+    callback = buftab2
+})
 
 -- Keymaps
 local map = vim.api.nvim_set_keymap
