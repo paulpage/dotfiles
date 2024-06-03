@@ -50,7 +50,10 @@ require('telescope').load_extension('emoji')
 vim.o.termguicolors = true
 require('colorizer').setup()
 
-if vim.fn.has('win32') then
+function is_windows()
+    return package.config:sub(1,1) == '\\'
+end
+if is_windows() then
     vim.g.vimwiki_list = {{path = 'C:\\notes', syntax = 'markdown', ext = '.md'}}
 else
     vim.g.vimwiki_list = {{path = '~/notes', syntax = 'markdown', ext = '.md'}}
