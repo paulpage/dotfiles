@@ -14,7 +14,6 @@ require 'paq' {
   'MunifTanjim/nui.nvim',  -- Required for neo-tree
   'norcalli/nvim-colorizer.lua',
   'tpope/vim-fugitive',
-  'nvim-tree/nvim-tree.lua',
 
   -- Language Support
   'vimwiki/vimwiki',
@@ -23,15 +22,6 @@ require 'paq' {
   'Vimjas/vim-python-pep8-indent',
   'salkin-mada/openscad.nvim',
 }
-
-vim.g.nvim_tree_show_icons = {
-  folders = 0,
-  files = 0,
-  git = 0,
-  folder_arrows = 0,
-}
-
-require('nvim-tree').setup()
 
 require('neo-tree').setup({
   filesystem = {
