@@ -83,31 +83,22 @@ vim.o.number = true
 vim.g.c_no_curly_error = true
 
 -- Filetype options
-function buftab2()
-  vim.bo.expandtab = true
-  vim.bo.tabstop = 2
-  vim.bo.shiftwidth = 2
+function buftab(filetype, space_count)
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = filetype,
+    callback = function()
+      vim.bo.expandtab = true
+      vim.bo.tabstop = space_count
+      vim.bo.shiftwidth = space_count
+    end
+  })
 end
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
-  callback = buftab2
-})
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "yaml",
-  callback = buftab2
-})
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "openscad",
-  callback = buftab2
-})
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "html",
-  callback = buftab2
-})
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
-  callback = buftab2
-})
+buftab("markdown", 2)
+buftab("vimwiki", 2)
+buftab("yaml", 2)
+buftab("openscad", 2)
+buftab("html", 2)
+buftab("lua", 2)
 
 -- Keymaps
 local map = vim.api.nvim_set_keymap
