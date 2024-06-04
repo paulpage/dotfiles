@@ -1,48 +1,69 @@
 -- Packages
 require 'paq' {
-    'savq/paq-nvim',
+  'savq/paq-nvim',
 
-    -- Editing
-    'tpope/vim-unimpaired',
-    'PeterRincker/vim-argumentative',
+  -- Editing
+  'tpope/vim-unimpaired',
+  'PeterRincker/vim-argumentative',
 
-    -- Interface
-    'nvim-lua/plenary.nvim', -- Required for telescope, neo-tree
-    { 'nvim-telescope/telescope.nvim', branch = '0.1.x' },
-    'xiyaowong/telescope-emoji.nvim',
-    -- 'nvim-tree/nvim-tree.lua',
-    { 'nvim-neo-tree/neo-tree.nvim', branch = 'v3.x' },
-    'MunifTanjim/nui.nvim',  -- Required for neo-tree
-    'norcalli/nvim-colorizer.lua',
+  -- Interface
+  'nvim-lua/plenary.nvim', -- Required for telescope, neo-tree
+  { 'nvim-telescope/telescope.nvim', branch = '0.1.x' },
+  'xiyaowong/telescope-emoji.nvim',
+  { 'nvim-neo-tree/neo-tree.nvim', branch = 'v3.x' },
+  'MunifTanjim/nui.nvim',  -- Required for neo-tree
+  'norcalli/nvim-colorizer.lua',
+  'tpope/vim-fugitive',
+  'nvim-tree/nvim-tree.lua',
 
-    -- Language Support
-    'vimwiki/vimwiki',
-    'hashivim/vim-terraform',
-    'Glench/Vim-Jinja2-Syntax',
-    'Vimjas/vim-python-pep8-indent',
-    'salkin-mada/openscad.nvim',
+  -- Language Support
+  'vimwiki/vimwiki',
+  'hashivim/vim-terraform',
+  'Glench/Vim-Jinja2-Syntax',
+  'Vimjas/vim-python-pep8-indent',
+  'salkin-mada/openscad.nvim',
 }
 
-require('neo-tree').setup({
-    enable_git_status = false,
-    default_component_configs = {
-        icon = {
-            folder_closed = '>',
-            folder_open = 'v',
-            folder_empty_closed = '>',
-            folder_empty = 'v',
-            default = ' ',
-            highlight = 'NeoTreeFileIcon',
-        },
+vim.g.nvim_tree_show_icons = {
+  folders = 0,
+  files = 0,
+  git = 0,
+  folder_arrows = 0,
+}
 
-        name = {
-            trailing_slash = true,
-        },
-    },
+require('nvim-tree').setup()
+
+require('neo-tree').setup({
+  filesystem = {
     window = {
-        mappings = {
-        },
+      mappings = {
+        ["/"] = "noop",
+        ["o"] = "open",
+        ["oc"] = "noop",
+        ["od"] = "noop",
+        ["og"] = "noop",
+        ["om"] = "noop",
+        ["on"] = "noop",
+        ["os"] = "noop",
+        ["ot"] = "noop",
+      },
+    }
+  },
+  enable_git_status = false,
+  default_component_configs = {
+    icon = {
+      folder_closed = '>',
+      folder_open = 'v',
+      folder_empty_closed = '>',
+      folder_empty = 'v',
+      default = ' ',
+      highlight = 'NeoTreeFileIcon',
     },
+
+    name = {
+      trailing_slash = true,
+    },
+  },
 })
 
 require('telescope').load_extension('emoji')
@@ -51,12 +72,12 @@ vim.o.termguicolors = true
 require('colorizer').setup()
 
 function is_windows()
-    return package.config:sub(1,1) == '\\'
+  return package.config:sub(1,1) == '\\'
 end
 if is_windows() then
-    vim.g.vimwiki_list = {{path = 'C:\\notes', syntax = 'markdown', ext = '.md'}}
+  vim.g.vimwiki_list = {{path = 'C:\\notes', syntax = 'markdown', ext = '.md'}}
 else
-    vim.g.vimwiki_list = {{path = '~/notes', syntax = 'markdown', ext = '.md'}}
+  vim.g.vimwiki_list = {{path = '~/notes', syntax = 'markdown', ext = '.md'}}
 end
 
 -- Options
@@ -73,25 +94,29 @@ vim.g.c_no_curly_error = true
 
 -- Filetype options
 function buftab2()
-    vim.bo.expandtab = true
-    vim.bo.tabstop = 2
-    vim.bo.shiftwidth = 2
+  vim.bo.expandtab = true
+  vim.bo.tabstop = 2
+  vim.bo.shiftwidth = 2
 end
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "markdown",
-    callback = buftab2
+  pattern = "markdown",
+  callback = buftab2
 })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "yaml",
-    callback = buftab2
+  pattern = "yaml",
+  callback = buftab2
 })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "openscad",
-    callback = buftab2
+  pattern = "openscad",
+  callback = buftab2
 })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "html",
-    callback = buftab2
+  pattern = "html",
+  callback = buftab2
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = buftab2
 })
 
 -- Keymaps
@@ -118,7 +143,7 @@ map('n', '<c-j>', ':cnext<CR>', opts)
 map('n', '<c-k>', ':cprev<CR>', opts)
 
 map('n', '<c-p>', ':Telescope find_files<CR>', opts)
-map('n', '<c-\\>', ':Neotree toggle<CR>', opts)  -- TODO validate or port refresh capability
+map('n', '<c-\\>', ':Neotree toggle<CR>', opts)
 
 map('i', '<c-s-e>', '<esc>:Telescope emoji<CR>', opts)
 map('n', '<c-s-e>', ':Telescope emoji<CR>', opts)
