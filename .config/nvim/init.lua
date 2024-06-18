@@ -79,6 +79,10 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 vim.o.number = true
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.linebreak = true
+vim.o.breakindent = true
 
 vim.g.c_no_curly_error = true
 
