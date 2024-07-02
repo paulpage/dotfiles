@@ -1,0 +1,6 @@
+neovim
+htop
+pkg-config
+zsh
+syncthing
+wl-clipboard

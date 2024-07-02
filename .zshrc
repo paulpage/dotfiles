@@ -38,4 +38,7 @@ export FZF_DEFAULT_COMMAND="fd ."
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
+# Needed for Arch Linux pkg-config to recognize (e.g.) sdl3 install path
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
