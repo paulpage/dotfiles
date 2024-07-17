@@ -13,18 +13,23 @@ def fail(msg):
     sys.exit(1)
 
 
-def config_folder():
-    folder = os.environ.get('XDG_CONFIG_HOME')
+def home_folder():
+    folder = os.environ.get('HOME')
     if folder is None:
-        fail('XDG_CONFIG_HOME environment variable is not set')
+        fail('HOME environment variable is not set')
     return folder
 
 
-def bootstrap_app(folder, filename):
-    src_folder = os.path.join(os.getcwd(), '.config', folder)
-    src_file = os.path.join(src_folder, filename)
-    dest_folder = os.path.join(config_folder(), folder)
-    dest_file = os.path.join(dest_folder, filename)
+# def bootstrap_app(folder, filename):
+def bootstrap_app(path):
+
+    f = list(path.split("/"))
+    d = f[:-1]
+
+    src_folder = os.path.join(os.getcwd(), *d)
+    dst_folder = os.path.join(home_folder(), *d)
+    src_file = os.path.join(os.getcwd(), *f)
+    dst_file = os.path.join(home_folder(), *f)
 
     if not os.path.exists(src_file):
         print(f'{src_file} does not exist. Create it?')
@@ -38,14 +43,22 @@ def bootstrap_app(folder, filename):
         else:
             sys.exit(0)
 
-    os.makedirs(dest_folder, exist_ok=True)
-    symlink(src_file, dest_file)
-    print(f'Symlinked {src_file} to {dest_file}')
+    os.makedirs(dst_folder, exist_ok=True)
+    symlink(src_file, dst_file)
+    print(f'Symlinked {src_file} to {dst_file}')
 
 
-# bootstrap_app('i3', 'config')
-if len(sys.argv) != 3:
-    print(f'Usage: {sys.argv[0]} <folder> <file>')
+config_entries = {
+    "emacs": ".config/emacs/init.el",
+    "foot": ".config/foot/foot.ini",
+    "git": ".config/git/config",
+}
+
+if len(sys.argv) != 2:
+    print(f"Usage: {sys.argv[0]} <app>")
+    print("\nApps:")
+    for app in config_entries.keys():
+        print(f"- {app}")
     sys.exit(1)
 
-bootstrap_app(sys.argv[1], sys.argv[2])
+bootstrap_app(config_entries[sys.argv[1]])
