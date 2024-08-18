@@ -21,30 +21,21 @@ fi
 # Disable terminal bell
 xset -b
 
-# Natural scrolling for the touchpad only
-#
-# You may have to set this differently in the future.
-# `xinput list` will show your devices, find your touchpad and note the id.
-# `xinput list-props {device id} | grep "Scrolling Distance"`, note the id in parentheses
-# and the values set for it.
-# The final command is `xinput set-prop {device id} {property id} -{value} -{value} ...`
-
-device_id=$(xinput list | grep 'Synaptics TM3512-001' | sed 's/.*id=\([0-9]*\).*/\1/')
+# Natural scrolling for the touchpad
+touchpad_query="Touchpad"
+# touchpad_query="Synaptics TM3512-001"
+device_id=$(xinput list | grep "$touchpad_query" | sed 's/.*id=\([0-9]*\).*/\1/')
 property_id=$(xinput list-props "$device_id" | grep 'Natural Scrolling Enabled (' | sed 's/.*(\([0-9]*\)).*/\1/')
 xinput set-prop "$device_id" "$property_id" 1
 
-# xinput set-prop 17 287 1
-# xinput set-prop 17 288 1
-
 # Caps lock to escape
 setxkbmap -option caps:escape 
-
-# picom &
-sxhkd &
-
-xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 
+# Background Services
+sxhkd &
+unclutter --hide-on-touch &
+# picom &
 bluetoothctl power on
 
 exec i3
