@@ -12,4 +12,4 @@ echo "$message"
 echo -n "Press enter to continue... (Ctrl-C to cancel)"
 read _
 git commit -m "$message"
-git push -u origin master
+git push

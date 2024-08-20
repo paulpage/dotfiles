@@ -3,3 +3,4 @@ htop
 pkg-config
 zsh
 fd
+rustup
