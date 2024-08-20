@@ -1,8 +1,6 @@
 rofi
 xorg-xinput
 xclip
-fd
-neovim
 bluez
 bluez-utils
 unclutter

@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 
 
 def symlink(target, link_name):
@@ -12,6 +13,9 @@ def fail(msg):
     print(f'ERROR: {msg}')
     sys.exit(1)
 
+def run(cmd):
+    subprocess.run(cmd)
+
 
 def home_folder():
     folder = os.environ.get('HOME')
@@ -20,7 +24,6 @@ def home_folder():
     return folder
 
 
-# def bootstrap_app(folder, filename):
 def bootstrap_app(path):
 
     f = list(path.split("/"))
@@ -48,17 +51,39 @@ def bootstrap_app(path):
     print(f'Symlinked {src_file} to {dst_file}')
 
 
-config_entries = {
+def install_arch_packages(filename):
+    with open(filename, "r") as f:
+        lines = f.readlines()
+    packages = [l.strip() for l in lines]
+    run(["sudo", "pacman", "-S", *packages])
+
+
+app_entries = {
     "emacs": ".config/emacs/init.el",
     "foot": ".config/foot/foot.ini",
     "git": ".config/git/config",
 }
+package_entries = {
+    "arch-common": "arch_packages_common.txt",
+    "arch-wayland": "arch_packages_wayland.txt",
+    "arch-i3": "arch_packages_i3.txt",
+}
+
 
 if len(sys.argv) != 2:
     print(f"Usage: {sys.argv[0]} <app>")
     print("\nApps:")
-    for app in config_entries.keys():
-        print(f"- {app}")
+    for e in app_entries.keys():
+        print(f"- {e}")
+    print("\nPackages:")
+    for e in package_entries.keys():
+        print(f"- {e}")
+
     sys.exit(1)
 
-bootstrap_app(config_entries[sys.argv[1]])
+choice = sys.argv[1]
+if choice in app_entries:
+    bootstrap_app(app_entries[choice])
+elif choice in package_entries:
+    if choice.startswith("arch"):
+        install_arch_packages(package_entries[choice])
