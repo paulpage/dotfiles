@@ -21,6 +21,20 @@ require 'paq' {
   'Glench/Vim-Jinja2-Syntax',
   'Vimjas/vim-python-pep8-indent',
   'salkin-mada/openscad.nvim',
+  'neovim/nvim-lspconfig',
+}
+
+require('lspconfig').rust_analyzer.setup {
+  settings = {
+    ['rust-analyzer'] = {
+      check = {
+        command = "clippy";
+      },
+      diagnostics = {
+        enable = true;
+      }
+    }
+  }
 }
 
 require('neo-tree').setup({
@@ -57,6 +71,15 @@ require('neo-tree').setup({
 })
 
 require('telescope').load_extension('emoji')
+require('telescope').setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["<esc>"] = require('telescope.actions').close,
+            },
+        },
+    },
+})
 
 vim.o.termguicolors = true
 require('colorizer').setup()
@@ -110,10 +133,10 @@ local opts = { noremap = true }
 map('n', '<space>w', ':w<CR>', opts)
 map('n', '<space>q', ':q<CR>', opts)
 
-map('n', '<space>p', '"*p', opts)
-map('n', '<space>y', '"*y', opts)
-map('v', '<space>p', '"*p', opts)
-map('v', '<space>y', '"*y', opts)
+map('n', '<space>p', '"+p', opts)
+map('n', '<space>y', '"+y', opts)
+map('v', '<space>p', '"+p', opts)
+map('v', '<space>y', '"+y', opts)
 
 map('n', '<space>dt', ':diffthis<CR>', opts)
 map('n', '<space>da', ':windo diffthis<CR>', opts)

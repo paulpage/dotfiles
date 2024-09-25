@@ -1,0 +1,5 @@
+python
+neovim
+zsh
+git
+termux-api
