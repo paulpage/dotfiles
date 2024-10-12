@@ -14,6 +14,7 @@ require 'paq' {
   'MunifTanjim/nui.nvim',  -- Required for neo-tree
   'norcalli/nvim-colorizer.lua',
   'tpope/vim-fugitive',
+  'morhetz/gruvbox',
 
   -- Language Support
   'vimwiki/vimwiki',
@@ -87,6 +88,7 @@ require('colorizer').setup()
 function is_windows()
   return package.config:sub(1,1) == '\\'
 end
+
 if is_windows() then
   vim.g.vimwiki_list = {{path = 'C:\\notes', syntax = 'markdown', ext = '.md'}}
 else
@@ -109,6 +111,8 @@ vim.o.breakindent = true
 
 vim.g.c_no_curly_error = true
 
+vim.cmd[[colorscheme gruvbox]]
+
 -- Filetype options
 function buftab(filetype, space_count)
   vim.api.nvim_create_autocmd("FileType", {
@@ -120,6 +124,17 @@ function buftab(filetype, space_count)
     end
   })
 end
+
+function bufmap(filetype, mode, key, action)
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = filetype,
+    callback = function()
+      local opts = { noremap = true }
+      vim.api.nvim_buf_set_keymap(0, mode, key, action, opts)
+    end
+  })
+end
+
 buftab("markdown", 2)
 buftab("vimwiki", 2)
 buftab("yaml", 2)
@@ -155,3 +170,14 @@ map('n', '<c-\\>', ':Neotree toggle<CR>', opts)
 
 map('i', '<c-s-e>', '<esc>:Telescope emoji<CR>', opts)
 map('n', '<c-s-e>', ':Telescope emoji<CR>', opts)
+
+map('n', '<C-F5>', ':nnoremap <F5> <LT>CR><left><left><left><left>', opts)
+map('n', '<F29>', ':nnoremap <F5> <LT>CR><left><left><left><left>', opts)
+map('n', '<C-F6>', ':nnoremap <F6> <LT>CR><left><left><left><left>', opts)
+map('n', '<F30>', ':nnoremap <F6> <LT>CR><left><left><left><left>', opts)
+
+map('n', '<F5>', ':make<CR>', opts)
+map('n', '<F6>', ':make run<CR>', opts)
+
+bufmap('rust', 'n', '<F5>', ':Cargo check<CR>a')
+bufmap('rust', 'n', '<F6>', ':Cargo run<CR>a')

@@ -4,3 +4,8 @@ pkg-config
 zsh
 fd
 rustup
+
+texlive-latex
+texlive-fontsrecommended
+texlive-latex-recommended
+texlive-latexrecommended
