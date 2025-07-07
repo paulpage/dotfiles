@@ -1,1 +1,5 @@
 sway
+bemenu
+bemenu-wayland
+foot
+waybar

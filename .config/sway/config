@@ -21,11 +21,9 @@ set $menu bemenu-run | xargs swaymsg exec --
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/default.png fill
 #
-# Example configuration:
-#
-output HDMI-A-1 resolution 1920x1080 position 0,0
-#
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+output eDP-1 resolution 1920x1080 position 0,0
+output DP-3 resolution 3440x1440@144Hz position 1920,0
 
 ### Idle configuration
 #
@@ -89,8 +87,7 @@ input type:touchpad {
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-    bindsym $mod+a exec pavucontrol
-    bindsym $mod+i exec firefox
+
 #
 # Moving around:
 #
@@ -179,6 +176,7 @@ input type:touchpad {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
 #
 # Resizing containers:
 #
@@ -204,6 +202,12 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+bindsym $mod+a exec pavucontrol
+bindsym $mod+i exec firefox
+bindsym $mod+apostrophe exec $term bc -lq
+bindsym $mod+n exec $term -D ~/notes nvim -c 'VimwikiIndex'
+bindsym $mod+BackSpace exec ~/.local/bin/scripts/sysact-wl
+
 #
 # Status Bar:
 #
@@ -226,8 +230,8 @@ include /etc/sway/config.d/*
 
 exec swayidle -w \
     timeout 300 'swaylock -f -c 000000' \
-    timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
+    timeout 600 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"' \
     before-sleep 'swaylock -f -c 000000'
 
 exec waybar

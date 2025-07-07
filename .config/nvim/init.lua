@@ -18,12 +18,23 @@ require 'paq' {
 
   -- Language Support
   'vimwiki/vimwiki',
+  -- 'serenevoid/kiwi.nvim',
+  -- 'lervag/wiki.vim',
   'hashivim/vim-terraform',
   'Glench/Vim-Jinja2-Syntax',
   'Vimjas/vim-python-pep8-indent',
   'salkin-mada/openscad.nvim',
   'neovim/nvim-lspconfig',
+  'tikhomirov/vim-glsl',
+  -- 'nvim-treesitter/nvim-treesitter',
 }
+
+-- require('nvim-treesitter.configs').setup {
+--     ensure_installed = { "markdown", "markdown_inline" },
+--     highlight = {
+--         enable = true,
+--     },
+-- }
 
 require('lspconfig').rust_analyzer.setup {
   settings = {
@@ -90,9 +101,20 @@ function is_windows()
 end
 
 if is_windows() then
+  -- vim.g.wiki_root = 'C:\\notes'
   vim.g.vimwiki_list = {{path = 'C:\\notes', syntax = 'markdown', ext = '.md'}}
 else
+  -- vim.g.wiki_root = '~/notes'
   vim.g.vimwiki_list = {{path = '~/notes', syntax = 'markdown', ext = '.md'}}
+end
+vim.g.markdown_sytax_conceal = 2
+
+if vim.g.neovide then
+    vim.o.guifont = "monospace:h12"
+    vim.g.neovide_scroll_animation_length = 0
+    vim.g.neovide_position_animation_length = 0
+    vim.g.neovide_cursor_animation_length = 0
+    -- vim.g.neovide_cursor_vfx_mode = "sonicboom"
 end
 
 -- Options
@@ -108,6 +130,8 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.linebreak = true
 vim.o.breakindent = true
+
+vim.opt.breakindentopt:append("list:2")
 
 vim.g.c_no_curly_error = true
 
@@ -165,6 +189,7 @@ map('n', '<space>vi', ':PaqSync<CR>', opts)
 map('n', '<c-j>', ':cnext<CR>', opts)
 map('n', '<c-k>', ':cprev<CR>', opts)
 
+map('n', '<c-b>', ':Telescope buffers<CR>', opts)
 map('n', '<c-p>', ':Telescope find_files<CR>', opts)
 map('n', '<c-\\>', ':Neotree toggle<CR>', opts)
 
@@ -181,3 +206,4 @@ map('n', '<F6>', ':make run<CR>', opts)
 
 bufmap('rust', 'n', '<F5>', ':Cargo check<CR>a')
 bufmap('rust', 'n', '<F6>', ':Cargo run<CR>a')
+
