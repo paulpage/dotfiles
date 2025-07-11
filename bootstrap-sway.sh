@@ -9,4 +9,11 @@ ln -sf "$PWD/.config/foot/foot.ini" "$HOME/.config/foot/foot.ini"
 mkdir -p "$HOME/.config/waybar"
 ln -sf "$PWD/.config/waybar/config" "$HOME/.config/waybar/config"
 
-sudo pacman -S bemenu bemenu-wayland foot waybar wl-clipboard swaylock swayidle
+ln -sf "$PWD/.config/mimeapps.list" "$HOME/.config/mimeapps.list"
+
+mkdir -p "$HOME/.local/share/applications"
+for f in $(ls .local/share/applications/*); do
+    ln -sf "$PWD/$f" "$HOME/$f"
+done
+
+sudo pacman -S $(cat arch_packages_sway.txt)

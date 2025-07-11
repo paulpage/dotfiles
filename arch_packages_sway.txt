@@ -3,3 +3,11 @@ bemenu
 bemenu-wayland
 foot
 waybar
+swaybg
+swaylock
+swayidle
+wl-clipboard
+imv
+zathura
+zathura-pdf-mupdf
+mupdf
