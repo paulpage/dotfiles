@@ -1,0 +1,7 @@
+wl-clipboard
+imv
+pcmanfm-qt
+zathura
+zathura-pdf-mupdf
+mupdf
+neovim
