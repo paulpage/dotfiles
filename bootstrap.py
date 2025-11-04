@@ -62,6 +62,7 @@ app_entries = {
     "emacs": ".config/emacs/init.el",
     "foot": ".config/foot/foot.ini",
     "git": ".config/git/config",
+    "gdb": ".config/gdb/gdbinit",
 }
 package_entries = {
     "arch-common": "arch_packages_common.txt",
