@@ -15,6 +15,7 @@ require 'paq' {
   'norcalli/nvim-colorizer.lua',
   'tpope/vim-fugitive',
   'morhetz/gruvbox',
+  'junegunn/goyo.vim',
 
   -- Language Support
   'vimwiki/vimwiki',
@@ -110,7 +111,7 @@ end
 vim.g.markdown_sytax_conceal = 2
 
 if vim.g.neovide then
-    vim.o.guifont = "monospace:h12"
+    vim.o.guifont = "Dejavu Sans Mono:h12"
     vim.g.neovide_scroll_animation_length = 0
     vim.g.neovide_position_animation_length = 0
     vim.g.neovide_cursor_animation_length = 0
@@ -136,6 +137,9 @@ vim.opt.breakindentopt:append("list:2")
 vim.g.c_no_curly_error = true
 
 vim.cmd[[colorscheme gruvbox]]
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NonText', { bg = 'none' })
 
 -- Filetype options
 function buftab(filetype, space_count)
