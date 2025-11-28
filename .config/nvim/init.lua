@@ -170,6 +170,7 @@ buftab("openscad", 2)
 buftab("html", 2)
 buftab("lua", 2)
 
+
 -- Keymaps
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true }
@@ -194,8 +195,14 @@ map('n', '<c-j>', ':cnext<CR>', opts)
 map('n', '<c-k>', ':cprev<CR>', opts)
 
 map('n', '<c-b>', ':Telescope buffers<CR>', opts)
-map('n', '<c-p>', ':Telescope find_files<CR>', opts)
 map('n', '<c-\\>', ':Neotree toggle<CR>', opts)
+vim.keymap.set("n", "<c-p>", function()
+  require("telescope.builtin").find_files({
+    hidden = true,
+    file_ignore_patterns = { "^%.git/" }, -- exclude .git folder
+    -- no_ignore = false,
+  })
+end)
 
 map('i', '<c-s-e>', '<esc>:Telescope emoji<CR>', opts)
 map('n', '<c-s-e>', ':Telescope emoji<CR>', opts)

@@ -7,12 +7,6 @@ case "$(readlink -f /sbin/init)" in
 	*) ctl='loginctl' ;;
 esac
 
-wmpid() { # This function is needed if there are multiple instances of the window manager.
-	tree="$(pstree -ps $$)"
-	tree="${tree#*$WM(}"
-	echo "${tree%%)*}"
-}
-
 lock() {
     playerctl pause
     swaylock -f -c 000000
