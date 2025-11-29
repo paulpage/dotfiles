@@ -22,6 +22,7 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/.local/bin/scripts:/home/paul/.cargo/bin:$HOME/go/bin:$HOME/s/ext/odin"
+export EDITOR=nvim
 
 alias vim=nvim
 alias e=nvim
