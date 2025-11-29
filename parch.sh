@@ -1,6 +1,7 @@
 # #!/bin/sh set -euo pipefail
 #
-sudo pacman -S --noconfirm git neovim openssh zsh man-db acpi ripgrep unzip rsync gvfs base-devel
+# sudo pacman -S --noconfirm git neovim openssh zsh man-db acpi ripgrep unzip rsync gvfs base-devel
+# sudo pacman -S --noconfirm sddm uwsm
 # sudo pacman -S --noconfirm hyprland waybar wl-clipboard xdg-utils nwg-look
 # sudo pacman -S --noconfirm imv zathura zathura-pdf-mupdf mupdf tesseract-data-eng mpv
 # sudo pacman -S --noconfirm ttf-dejavu noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-linux-libertine otf-font-awesome
@@ -32,6 +33,7 @@ bootstrap-hypr() {
     bootstrap .config/hypr/hyprpaper.conf
     bootstrap .config/hypr/hyprlock.conf
     bootstrap .config/waybar/config
+    bootstrap .config/waybar/style.css
 }
 
 bootstrap-nvim() {
