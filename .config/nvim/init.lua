@@ -4,6 +4,7 @@ require 'paq' {
 
   -- Editing
   'tpope/vim-unimpaired',
+  'tpope/vim-commentary',
   'PeterRincker/vim-argumentative',
 
   -- Interface
@@ -28,6 +29,7 @@ require 'paq' {
   'neovim/nvim-lspconfig',
   'tikhomirov/vim-glsl',
   -- 'nvim-treesitter/nvim-treesitter',
+  'kalvinpearce/ShaderHighlight',
 }
 
 -- require('nvim-treesitter.configs').setup {
@@ -94,6 +96,14 @@ require('telescope').setup({
     },
 })
 
+if vim.g.neovide then
+  vim.o.guifont = "Consolas:h12"
+  vim.g.neovide_scroll_animation_length = 0.05
+  vim.g.neovide_cursor_animation_length = 0
+  vim.opt.mousescroll = "ver:5,hor:2"
+
+end
+
 vim.o.termguicolors = true
 require('colorizer').setup()
 
@@ -102,11 +112,11 @@ function is_windows()
 end
 
 if is_windows() then
-  -- vim.g.wiki_root = 'C:\\notes'
-  vim.g.vimwiki_list = {{path = 'C:\\notes', syntax = 'markdown', ext = '.md'}}
+  vim.g.wiki_location = 'C:\\notes'
+  vim.g.vimwiki_list = {{path = 'C:\\notes', syntax = 'markdown', ext = '.md', listsyms = ' .ox'}}
 else
-  -- vim.g.wiki_root = '~/notes'
-  vim.g.vimwiki_list = {{path = '~/notes', syntax = 'markdown', ext = '.md'}}
+  vim.g.wiki_location = '~/notes'
+  vim.g.vimwiki_list = {{path = '~/notes', syntax = 'markdown', ext = '.md', listsyms=' .ox'}}
 end
 vim.g.markdown_sytax_conceal = 2
 
@@ -131,10 +141,18 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.linebreak = true
 vim.o.breakindent = true
+vim.o.shellslash = true
 
 vim.opt.breakindentopt:append("list:2")
 
 vim.g.c_no_curly_error = true
+vim.o.cinoptions = "(s,m1"
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt.formatoptions:remove({ "r", "o" })
+  end,
+}) -- no comment continuation after newline
 
 vim.cmd[[colorscheme gruvbox]]
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
@@ -162,6 +180,13 @@ function bufmap(filetype, mode, key, action)
     end
   })
 end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "hlsl",
+    callback = function()
+        vim.bo.commentstring = "// %s"
+    end
+})
 
 buftab("markdown", 2)
 buftab("vimwiki", 2)
@@ -194,6 +219,7 @@ map('n', '<space>vi', ':PaqSync<CR>', opts)
 map('n', '<c-j>', ':cnext<CR>', opts)
 map('n', '<c-k>', ':cprev<CR>', opts)
 
+-- map('n', '<c-p>', ':Telescope find_files<CR>', opts)
 map('n', '<c-b>', ':Telescope buffers<CR>', opts)
 map('n', '<c-\\>', ':Neotree toggle<CR>', opts)
 vim.keymap.set("n", "<c-p>", function()
@@ -218,3 +244,13 @@ map('n', '<F6>', ':make run<CR>', opts)
 bufmap('rust', 'n', '<F5>', ':Cargo check<CR>a')
 bufmap('rust', 'n', '<F6>', ':Cargo run<CR>a')
 
+-- map('n', '<c-l>', ':tcd ', opts)
+map('n', '<c-t>', ':tabe<CR>', opts)
+
+vim.keymap.set('n', '<leader>ww', function()
+  vim.cmd('tcd ' .. vim.g.wiki_location)
+  vim.cmd('VimwikiTabIndex')
+end, opts)
+
+map('n', '<c-tab>', ':tabnext<CR>', opts)
+map('n', '<c-s-tab>', ':tabprevious<CR>', opts)
