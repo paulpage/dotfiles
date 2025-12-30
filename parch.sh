@@ -12,6 +12,8 @@
 # sudo systemctl enable --now getty@tty3.service
 # sudo systemctl enable --now getty@tty4.service
 # sudo systemctl enable --now getty@tty5.service
+sudo pacman -S --nocomfirm hugo
+sudo pacman -S --nocomfirm samba cifs-utils
 
 
 bootstrap() {
