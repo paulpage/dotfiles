@@ -1,20 +1,24 @@
-# #!/bin/sh set -euo pipefail
-#
-# sudo pacman -S --noconfirm git neovim openssh zsh man-db acpi ripgrep unzip rsync gvfs base-devel
-# sudo pacman -S --noconfirm sddm uwsm
-# sudo pacman -S --noconfirm hyprland waybar wl-clipboard xdg-utils nwg-look
-# sudo pacman -S --noconfirm imv zathura zathura-pdf-mupdf mupdf tesseract-data-eng mpv
-# sudo pacman -S --noconfirm ttf-dejavu noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-linux-libertine otf-font-awesome
-#
-# sudo pacman -S --noconfirm firefox pcmanfm foot wofi
-#
-# sudo systemctl enable --now getty@tty2.service
-# sudo systemctl enable --now getty@tty3.service
-# sudo systemctl enable --now getty@tty4.service
-# sudo systemctl enable --now getty@tty5.service
-sudo pacman -S --nocomfirm hugo
-sudo pacman -S --nocomfirm samba cifs-utils
+#!/bin/sh
 
+set -euo pipefail
+
+requested_progs=$(awk 'NF && !/^[[:space:]]*#/{print $2}' arch_programs.tsv)
+present_progs=$(pacman -Qqe)
+needed_progs=$(
+  comm -23 \
+    <(printf '%s\n' "$requested_progs" | sort -u) \
+    <(printf '%s\n' "$present_progs" | sort -u)
+)
+if [ -n "$needed_progs" ]; then
+    sudo pacman -S --noconfirm $needed_progs
+fi
+
+for n in {2..5}; do
+    svc="getty@tty${n}.service"
+    if ! systemctl is-enabled --quiet "$svc"; then
+        systemctl enable --now "$svc"
+    fi
+done
 
 bootstrap() {
 	mkdir -p "$HOME/$(dirname $1)"
