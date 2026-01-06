@@ -76,3 +76,5 @@ bootstrap-zsh
 bootstrap-hypr
 
 bootstrap .local/bin/scripts
+
+# TODO could have a command here that sets our own remote origin to the ssh version of the URL
