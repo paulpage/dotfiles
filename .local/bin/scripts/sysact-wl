@@ -1,29 +1,29 @@
-#!/bin/sh
-
-# # A dmenu wrapper script for system functions.
-# export WM="sway"
-# case "$(readlink -f /sbin/init)" in
-# 	*systemd*) ctl='systemctl' ;;
-# 	*) ctl='loginctl' ;;
-# esac
-#
-# lock() {
-#     playerctl pause
-#     swaylock -f -c 000000
-#     playerctl play
-# }
-#
-# case "$(printf "🔒 lock\n🚪 leave $WM\n♻️ renew $WM\n🐻 hibernate\n🔃 reboot\n🖥️shutdown\n💤 sleep\n📺 display off" | bemenu -i -p 'Action: ')" in
-# 	'🔒 lock') lock ;;
-# 	"🚪 leave $WM") swaymsg exit ;;
-# 	"♻️ renew $WM") swaymsg reload ;;
-# 	'🐻 hibernate') $ctl hibernate -i ;;
-# 	'💤 sleep') $ctl suspend -i ;;
-# 	'🔃 reboot') $ctl reboot -i ;;
-# 	'🖥️shutdown') $ctl poweroff -i ;;
-# 	'📺 display off') swaymsg 'output * power off' ;;
-# 	*) exit 1 ;;
-# esac
+# !/bin/sh
+# 
+#  # A dmenu wrapper script for system functions.
+#  export WM="sway"
+#  case "$(readlink -f /sbin/init)" in
+#  	*systemd*) ctl='systemctl' ;;
+#  	*) ctl='loginctl' ;;
+#  esac
+# 
+#  lock() {
+#      playerctl pause
+#      swaylock -f -c 000000
+#      playerctl play
+#  }
+# 
+#  case "$(printf "🔒 lock\n🚪 leave $WM\n♻️ renew $WM\n🐻 hibernate\n🔃 reboot\n🖥️shutdown\n💤 sleep\n📺 display off" | bemenu -i -p 'Action: ')" in
+#  	'🔒 lock') lock ;;
+#  	"🚪 leave $WM") swaymsg exit ;;
+#  	"♻️ renew $WM") swaymsg reload ;;
+#  	'🐻 hibernate') $ctl hibernate -i ;;
+#  	'💤 sleep') $ctl suspend -i ;;
+#  	'🔃 reboot') $ctl reboot -i ;;
+#  	'🖥️shutdown') $ctl poweroff -i ;;
+#  	'📺 display off') swaymsg 'output * power off' ;;
+#  	*) exit 1 ;;
+#  esac
 
 
 # A dmenu wrapper script for Hyprland system functions.
@@ -48,6 +48,6 @@ case "$(printf "🔒 lock\n🚪 leave $WM\n♻️ renew $WM\n🐻 hibernate\n�
     '💤 sleep') $ctl suspend -i ;;
     '🔃 reboot') $ctl reboot -i ;;
     '🖥️ shutdown') $ctl poweroff -i ;;
-    '📺 display off') hyprctl dispatch dpms off ;;
+    '📺 display off') sleep 0.1 && hyprctl dispatch dpms off ;;
     *) exit 1 ;;
 esac

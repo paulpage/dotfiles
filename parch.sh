@@ -69,6 +69,7 @@ bootstrap .config/foot/foot.ini
 bootstrap .config/git/config
 bootstrap .config/gdb/gdbinit
 bootstrap .config/git/config
+bootstrap .config/sway/config
 
 bootstrap-nvim
 bootstrap-zsh
