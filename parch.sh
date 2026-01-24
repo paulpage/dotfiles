@@ -13,12 +13,12 @@ if [ -n "$needed_progs" ]; then
     sudo pacman -S --noconfirm $needed_progs
 fi
 
-for n in {2..5}; do
-    svc="getty@tty${n}.service"
-    if ! systemctl is-enabled --quiet "$svc"; then
-        systemctl enable --now "$svc"
-    fi
-done
+# for n in {2..5}; do
+#     svc="getty@tty${n}.service"
+#     if ! systemctl is-enabled --quiet "$svc"; then
+#         sudo systemctl enable --now "$svc"
+#     fi
+# done
 
 bootstrap() {
 	mkdir -p "$HOME/$(dirname $1)"
