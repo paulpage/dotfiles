@@ -5,6 +5,8 @@ core	zsh
 data	mpv
 dev	base-devel
 dev	hugo
+dev	cmake
+dev	ninja
 files	cifs-utils
 files	gvfs
 files	samba
@@ -39,5 +41,11 @@ wm	waybar
 wm	wl-clipboard
 wm	wofi
 wm	xdg-utils
+virt	hyprpolkitagent
+virt	dnsmasq
+virt	virt-manager
+virt	qemu-base
+virt	qemu-desktop
+virt	swtpm
 
 # vim: set ts=8 sw=8 sts=8 noet:
