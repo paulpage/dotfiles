@@ -38,6 +38,10 @@ vim.lsp.config('clangd', {
 })
 vim.lsp.enable('clangd')
 
+vim.lsp.config('ols', {})
+vim.lsp.enable('ols')
+
+
 -- require('nvim-treesitter.configs').setup {
 --     ensure_installed = { "markdown", "markdown_inline" },
 --     highlight = {
@@ -136,7 +140,6 @@ if is_windows() then
 else
   vim.g.wiki_location = '~/notes'
   vim.g.vimwiki_list = {{path = '~/notes', syntax = 'markdown', ext = '.md', listsyms=' .ox'}}
-  vim.g.vimwiki_tag_format = '#[%w:-]+'
 end
 vim.g.markdown_sytax_conceal = 2
 
@@ -165,6 +168,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.formatoptions:remove({ "r", "o" })
   end,
 }) -- no comment continuation after newline
+
+-- vim.cmd[[colorscheme gruvbox]]
+vim.cmd[[colorscheme peachpuff]]
+vim.cmd[[set bg=light]]
+-- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'NonText', { bg = 'none' })
 
 -- Filetype options
 function buftab(filetype, space_count)
@@ -271,3 +281,24 @@ map('n', '<c-s-tab>', ':tabprevious<CR>', opts)
 
 map('n', '<c-scrollwheelup>', ':lua adjust_font_size(1)<CR>', opts_silent)
 map('n', '<c-scrollwheeldown>', ':lua adjust_font_size(-1)<CR>', opts_silent)
+
+map('n', '<c-a><c-u>', 'yypVr=<c-l>', opts)
+map('n', '<c-a><c-d>', 'o<esc>60i-<esc>', opts)
+
+function append_to_line(text)
+    -- Get the current buffer and cursor position
+    local buf = vim.api.nvim_get_current_buf()
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    local current_line = vim.api.nvim_buf_get_lines(buf, cursor_pos[1] - 1, cursor_pos[1], false)[1]
+    local new_line = current_line .. text
+    vim.api.nvim_buf_set_lines(buf, cursor_pos[1] - 1, cursor_pos[1], false, { new_line })
+    vim.api.nvim_win_set_cursor(0, { cursor_pos[1], #new_line })
+end
+
+function append_date()
+    append_to_line(os.date("%Y-%m-%d"))
+end
+
+map('n', '<c-n><c-n>', ':cd ' .. vim.g.wiki_location .. '<CR>:VimwikiIndex<CR>', opts)
+map('n', '<c-n><c-s>', ':!note-sync<CR>', opts)
+map('n', '<c-a><c-d>', ':lua append_date()<CR>', opts)
