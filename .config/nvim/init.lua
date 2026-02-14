@@ -30,7 +30,13 @@ require 'paq' {
   'tikhomirov/vim-glsl',
   -- 'nvim-treesitter/nvim-treesitter',
   'kalvinpearce/ShaderHighlight',
+  'mattn/calendar-vim',
 }
+
+vim.lsp.config('clangd', {
+  filetypes = { 'c' },
+})
+vim.lsp.enable('clangd')
 
 -- require('nvim-treesitter.configs').setup {
 --     ensure_installed = { "markdown", "markdown_inline" },
@@ -96,20 +102,33 @@ require('telescope').setup({
     },
 })
 
+function is_windows()
+  return package.config:sub(1,1) == '\\'
+end
+
+if is_windows() then
+  vim.opt.shellslash = true
+end
+
+vim.cmd[[colorscheme gruvbox]]
 if vim.g.neovide then
-  vim.o.guifont = "Consolas:h12"
+  if is_windows() then
+    vim.o.guifont = "Consolas:h12"
+  else
+    vim.o.guifont = "Dejavu Sans Mono:h12"
+  end
   vim.g.neovide_scroll_animation_length = 0.05
   vim.g.neovide_cursor_animation_length = 0
   vim.opt.mousescroll = "ver:5,hor:2"
-
+else
+  -- Use terminal background in terminal
+  vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+  vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+  vim.api.nvim_set_hl(0, 'NonText', { bg = 'none' })
 end
 
 vim.o.termguicolors = true
 require('colorizer').setup()
-
-function is_windows()
-  return package.config:sub(1,1) == '\\'
-end
 
 if is_windows() then
   vim.g.wiki_location = 'C:\\notes'
@@ -117,16 +136,9 @@ if is_windows() then
 else
   vim.g.wiki_location = '~/notes'
   vim.g.vimwiki_list = {{path = '~/notes', syntax = 'markdown', ext = '.md', listsyms=' .ox'}}
+  vim.g.vimwiki_tag_format = '#[%w:-]+'
 end
 vim.g.markdown_sytax_conceal = 2
-
-if vim.g.neovide then
-    vim.o.guifont = "Dejavu Sans Mono:h12"
-    vim.g.neovide_scroll_animation_length = 0
-    vim.g.neovide_position_animation_length = 0
-    vim.g.neovide_cursor_animation_length = 0
-    -- vim.g.neovide_cursor_vfx_mode = "sonicboom"
-end
 
 -- Options
 vim.o.expandtab = true
@@ -153,11 +165,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.formatoptions:remove({ "r", "o" })
   end,
 }) -- no comment continuation after newline
-
-vim.cmd[[colorscheme gruvbox]]
-vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'NonText', { bg = 'none' })
 
 -- Filetype options
 function buftab(filetype, space_count)
@@ -195,10 +202,17 @@ buftab("openscad", 2)
 buftab("html", 2)
 buftab("lua", 2)
 
+font = "Consolas"
+font_size = 12
+function adjust_font_size(inc)
+    font_size = math.max(1, font_size + inc)
+    vim.o.guifont = font .. ":h" .. font_size
+end
 
 -- Keymaps
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true }
+local opts_silent = { noremap = true, silent = true }
 map('n', '<space>w', ':w<CR>', opts)
 map('n', '<space>q', ':q<CR>', opts)
 
@@ -254,3 +268,6 @@ end, opts)
 
 map('n', '<c-tab>', ':tabnext<CR>', opts)
 map('n', '<c-s-tab>', ':tabprevious<CR>', opts)
+
+map('n', '<c-scrollwheelup>', ':lua adjust_font_size(1)<CR>', opts_silent)
+map('n', '<c-scrollwheeldown>', ':lua adjust_font_size(-1)<CR>', opts_silent)
