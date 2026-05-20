@@ -13,7 +13,7 @@ require 'paq' {
   'xiyaowong/telescope-emoji.nvim',
   { 'nvim-neo-tree/neo-tree.nvim', branch = 'v3.x' },
   'MunifTanjim/nui.nvim',  -- Required for neo-tree
-  'norcalli/nvim-colorizer.lua',
+  'catgoose/nvim-colorizer.lua',
   'tpope/vim-fugitive',
   'morhetz/gruvbox',
   'junegunn/goyo.vim',
