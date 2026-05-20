@@ -17,6 +17,7 @@ require 'paq' {
   'tpope/vim-fugitive',
   'morhetz/gruvbox',
   'junegunn/goyo.vim',
+  'Pocco81/high-str.nvim',
 
   -- Language Support
   'vimwiki/vimwiki',
@@ -40,6 +41,9 @@ vim.lsp.enable('clangd')
 
 vim.lsp.config('ols', {})
 vim.lsp.enable('ols')
+
+-- always enable signcolumn so it's not flashing in and out with LSP errors
+vim.opt.signcolumn = "yes"
 
 
 -- require('nvim-treesitter.configs').setup {
@@ -169,9 +173,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 }) -- no comment continuation after newline
 
--- vim.cmd[[colorscheme gruvbox]]
-vim.cmd[[colorscheme peachpuff]]
-vim.cmd[[set bg=light]]
 -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 -- vim.api.nvim_set_hl(0, 'NonText', { bg = 'none' })
@@ -249,7 +250,7 @@ map('n', '<c-\\>', ':Neotree toggle<CR>', opts)
 vim.keymap.set("n", "<c-p>", function()
   require("telescope.builtin").find_files({
     hidden = true,
-    file_ignore_patterns = { "^%.git/" }, -- exclude .git folder
+    file_ignore_patterns = { "%.git/", "%.git\\" }, -- exclude .git folder
     -- no_ignore = false,
   })
 end)
@@ -258,12 +259,12 @@ map('i', '<c-s-e>', '<esc>:Telescope emoji<CR>', opts)
 map('n', '<c-s-e>', ':Telescope emoji<CR>', opts)
 
 map('n', '<C-F5>', ':nnoremap <F5> <LT>CR><left><left><left><left>', opts)
-map('n', '<F29>', ':nnoremap <F5> <LT>CR><left><left><left><left>', opts)
+map('n', '<F29>',  ':nnoremap <F5> <LT>CR><left><left><left><left>', opts)
 map('n', '<C-F6>', ':nnoremap <F6> <LT>CR><left><left><left><left>', opts)
-map('n', '<F30>', ':nnoremap <F6> <LT>CR><left><left><left><left>', opts)
+map('n', '<F30>',  ':nnoremap <F6> <LT>CR><left><left><left><left>', opts)
 
-map('n', '<F5>', ':make<CR>', opts)
-map('n', '<F6>', ':make run<CR>', opts)
+map('n', '<F5>', ':wa<CR>:silent make<CR>', opts)
+map('n', '<F6>', ':wa<CR>:silent make run<CR>', opts)
 
 bufmap('rust', 'n', '<F5>', ':Cargo check<CR>a')
 bufmap('rust', 'n', '<F6>', ':Cargo run<CR>a')
@@ -299,6 +300,20 @@ function append_date()
     append_to_line(os.date("%Y-%m-%d"))
 end
 
-map('n', '<c-n><c-n>', ':cd ' .. vim.g.wiki_location .. '<CR>:VimwikiIndex<CR>', opts)
+map('n', '<c-n><c-n>', ':tcd ' .. vim.g.wiki_location .. '<CR>:VimwikiIndex<CR>gg0<tab>', {noremap = false})
 map('n', '<c-n><c-s>', ':!note-sync<CR>', opts)
 map('n', '<c-a><c-d>', ':lua append_date()<CR>', opts)
+map('i', '<c-a><c-d>', '<esc>:lua append_date()<CR>', opts)
+map('n', '<c-s-space>', 'dd:w<CR>:e Archived TODO.md<CR>GpA #done:<esc>:lua append_date()<CR>:s/\\[ \\]/[x]/g<CR>:w<CR>', opts)
+
+map('v', '<c-h>1', ':<c-u>HSHighlight 1<CR>', opts)
+map('v', '<c-h>2', ':<c-u>HSHighlight 2<CR>', opts)
+map('v', '<c-h>3', ':<c-u>HSHighlight 3<CR>', opts)
+map('v', '<c-h>4', ':<c-u>HSHighlight 4<CR>', opts)
+map('v', '<c-h>5', ':<c-u>HSHighlight 5<CR>', opts)
+map('v', '<c-h>6', ':<c-u>HSHighlight 6<CR>', opts)
+map('v', '<c-h>7', ':<c-u>HSHighlight 7<CR>', opts)
+map('v', '<c-h>8', ':<c-u>HSHighlight 8<CR>', opts)
+map('v', '<c-h>9', ':<c-u>HSHighlight 9<CR>', opts)
+map('v', '<c-h>0', ':<c-u>HSHighlight 0<CR>', opts)
+map('v', '<c-h><c-r>', ':<c-u>HSRmHighlight<CR>', opts)
