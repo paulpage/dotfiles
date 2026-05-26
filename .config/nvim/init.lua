@@ -34,13 +34,13 @@ require 'paq' {
   'mattn/calendar-vim',
 }
 
-vim.lsp.config('clangd', {
-  filetypes = { 'c' },
-})
 vim.lsp.enable('clangd')
-
 vim.lsp.config('ols', {})
 vim.lsp.enable('ols')
+vim.lsp.config('pyright', {})
+vim.lsp.enable('pyright')
+vim.lsp.config('ts_ls', {})
+vim.lsp.enable('ts_ls')
 
 -- always enable signcolumn so it's not flashing in and out with LSP errors
 vim.opt.signcolumn = "yes"
@@ -118,7 +118,6 @@ if is_windows() then
   vim.opt.shellslash = true
 end
 
-vim.cmd[[colorscheme gruvbox]]
 if vim.g.neovide then
   if is_windows() then
     vim.o.guifont = "Consolas:h12"
@@ -173,6 +172,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 }) -- no comment continuation after newline
 
+vim.cmd[[colorscheme gruvbox]]
+vim.cmd[[set bg=dark]]
 -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 -- vim.api.nvim_set_hl(0, 'NonText', { bg = 'none' })

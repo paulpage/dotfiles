@@ -42,4 +42,8 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # Needed for Arch Linux pkg-config to recognize (e.g.) sdl3 install path
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig"
 
+if command -v fnm >/dev/null 2>&1; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
