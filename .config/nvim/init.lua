@@ -125,6 +125,7 @@ if vim.g.neovide then
   vim.g.neovide_scroll_animation_length = 0.05
   vim.g.neovide_cursor_animation_length = 0
   vim.opt.mousescroll = "ver:5,hor:2"
+  vim.g.neovide_progress_bar_enabled = false
 else
   -- One tick mouse scroll on terminals
   vim.opt.mousescroll = "ver:1,hor:2"
@@ -212,6 +213,14 @@ font_size = 12
 function adjust_font_size(inc)
     font_size = math.max(1, font_size + inc)
     vim.o.guifont = font .. ":h" .. font_size
+end
+
+function toggle_keymap()
+  if vim.o.keymap == "" then
+    vim.o.keymap = "russian-jcukenwin"
+  else
+    vim.o.keymap = ""
+  end
 end
 
 -- Keymaps
@@ -311,3 +320,6 @@ map('v', '<c-h>8', ':<c-u>HSHighlight 8<CR>', opts)
 map('v', '<c-h>9', ':<c-u>HSHighlight 9<CR>', opts)
 map('v', '<c-h>0', ':<c-u>HSHighlight 0<CR>', opts)
 map('v', '<c-h><c-r>', ':<c-u>HSRmHighlight<CR>', opts)
+
+map('n', '<c-space>', ':lua toggle_keymap()<CR>', opts_silent)
+map('i', '<c-space>', '<esc>:lua toggle_keymap()<CR>a', opts_silent)
