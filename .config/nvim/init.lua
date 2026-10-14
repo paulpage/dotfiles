@@ -21,8 +21,6 @@ require 'paq' {
 
   -- Language Support
   'vimwiki/vimwiki',
-  -- 'serenevoid/kiwi.nvim',
-  -- 'lervag/wiki.vim',
   'hashivim/vim-terraform',
   'Glench/Vim-Jinja2-Syntax',
   'Vimjas/vim-python-pep8-indent',
@@ -128,10 +126,8 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0
   vim.opt.mousescroll = "ver:5,hor:2"
 else
-  -- Use terminal background in terminal
-  vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-  vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-  vim.api.nvim_set_hl(0, 'NonText', { bg = 'none' })
+  -- One tick mouse scroll on terminals
+  vim.opt.mousescroll = "ver:1,hor:2"
 end
 
 vim.o.termguicolors = true
@@ -174,9 +170,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.cmd[[colorscheme gruvbox]]
 vim.cmd[[set bg=dark]]
--- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
--- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
--- vim.api.nvim_set_hl(0, 'NonText', { bg = 'none' })
 
 -- Filetype options
 function buftab(filetype, space_count)
@@ -284,8 +277,8 @@ map('n', '<c-s-tab>', ':tabprevious<CR>', opts)
 map('n', '<c-scrollwheelup>', ':lua adjust_font_size(1)<CR>', opts_silent)
 map('n', '<c-scrollwheeldown>', ':lua adjust_font_size(-1)<CR>', opts_silent)
 
-map('n', '<c-a><c-u>', 'yypVr=<c-l>', opts)
-map('n', '<c-a><c-d>', 'o<esc>60i-<esc>', opts)
+-- map('n', '<c-a><c-u>', 'yypVr=<c-l>', opts)
+-- map('n', '<c-a><c-d>', 'o<esc>60i-<esc>', opts)
 
 function append_to_line(text)
     -- Get the current buffer and cursor position
